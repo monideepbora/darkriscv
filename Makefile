@@ -71,12 +71,12 @@ default: all
 all:
 	make -C src all             CROSS=$(CROSS) CCPATH=$(CCPATH) ARCH=$(ARCH) $(MTYPE)
 	make -C sim all             ICARUS=$(ICARUS) $(MTYPE)
-	make -C boards all          BOARD=$(BOARD) $(MTYPE)
+	#make -C boards all          BOARD=$(BOARD) $(MTYPE)
 
 install:
 	make -C boards install      BOARD=$(BOARD)
 
 clean:
-	make -C src clean
+	#make -C src clean
 	make -C sim clean
 	make -C boards clean        BOARD=$(BOARD)

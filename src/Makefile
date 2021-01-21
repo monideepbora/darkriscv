@@ -96,7 +96,7 @@ all: $(TARGETS) $(DEPS)
 	echo sources ok.
 
 clean:
-	-rm *.s *.o $(PROJ).{bin,lst,map,ram,rom,x86,text,data,bin,ld}
+	#-rm *.s *.o $(PROJ).{bin,lst,map,ram,rom,x86,text,data,bin,ld}
 
 %.o: %.s
 	$(AS) $(ASFLAGS) -c $< -o $@

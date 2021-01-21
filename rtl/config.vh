@@ -116,7 +116,7 @@
 // the stack can be positioned in the top of RAM and does not match with the
 // .data.
 
-`define __HARVARD__
+//`define __HARVARD__
 
 // full harvard architecture:
 // 

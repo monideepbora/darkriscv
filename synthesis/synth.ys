@@ -1,0 +1,28 @@
+# read the standalone core without any interfaces or peripherals
+#
+read_verilog ../rtl/darkuart.v ../rtl/darkriscv.v ../rtl/config.vh 
+
+#verilog_defines -DBOARD_CK_REF=100000000 
+read_verilog ../rtl/darksocv.v 
+
+# set picorv32 core as top module
+#hierarchy -top darksocv
+
+# apply optimizations
+#proc
+#flatten
+
+# synthesize, map elements to internal modules of yosys
+#synth
+
+# map sequential blocks to library modules
+#dfflibmap -liberty ../../nangate/NangateOpenCellLibrary_typical.lib
+
+# map combinational blocks to library modules
+#abc -liberty ../../nangate/NangateOpenCellLibrary_typical.lib
+
+# clean up and optimize further
+#clean
+
+# write finished gate netlist to verilog file
+#write_verilog picorv32-post-synth.v

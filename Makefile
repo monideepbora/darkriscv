@@ -33,17 +33,17 @@
 # makefiles. Of course, you need first set the GCC compiler path/name, the
 # simulator path/name and the board model:
 #
-   ARCH = rv32e
-#  ARCH = rv32i
+   #ARCH = rv32e
+  ARCH = rv32i
 #ENDIAN = _le
 #ENDIAN = _be
-HARVARD = 1
+#HARVARD = 1
 # CROSS = riscv-elf
-# CROSS = riscv32-unknown-elf
+ CROSS = riscv32-unknown-elf
 # CROSS = riscv32-embedded-elf
-  CROSS = riscv32-embedded$(ENDIAN)-elf
+#  CROSS = riscv32-embedded$(ENDIAN)-elf
 #CCPATH = /usr/local/share/toolchain-$(CROSS)/bin
- CCPATH = /usr/local/share/gcc-$(CROSS)/bin/
+ CCPATH = /opt/riscv32/bin
  ICARUS = /usr/local/bin/iverilog
 #BOARD  = avnet_microboard_lx9
 #BOARD  = xilinx_ac701_a200

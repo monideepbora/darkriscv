@@ -33,21 +33,21 @@ endif
 
 ifndef CROSS
 
-    ARCH = rv32e
-    #ARCH = rv32i
+    #ARCH = rv32e
+    ARCH = rv32i
     
     #TODO: better way to switch little/big-endian:
     #ENDIAN = _le # gcc for little-endian
     #ENDIAN = _be # gcc for big-endian
 
-    CROSS = riscv32-embedded$(ENDIAN)-elf
+    #CROSS = riscv32-embedded$(ENDIAN)-elf
     #CROSS = riscv-elf
-    #CROSS = riscv32-unknown-elf
+    CROSS = riscv32-unknown-elf
     #CROSS = riscv32-embedded-elf
     
-    CCPATH = /usr/local/share/gcc-$(CROSS)/bin/
+    CCPATH = /opt/riscv32/bin
     #CCPATH = /usr/local/share/toolchain-$(CROSS)/bin
-    HARVARD = 1
+    #HARVARD = 1
 endif
 
 ifndef BUILD

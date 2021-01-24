@@ -1,8 +1,9 @@
 # read the standalone core without any interfaces or peripherals
 #
-read_verilog ../rtl/darkuart.v ../rtl/darkriscv.v ../rtl/config.vh 
+verilog_defines -D__HARVARD__ -D__UARTSPEED__=115200 -D__3STAGE__ -D__RESETPC__=32'd0 -D__RESETSP__=32'd98304
+read_verilog ../rtl/darkriscv.v 
 
-#verilog_defines -DBOARD_CK_REF=100000000 
+
 read_verilog ../rtl/darksocv.v 
 
 # set picorv32 core as top module

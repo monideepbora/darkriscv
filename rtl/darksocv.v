@@ -62,14 +62,14 @@ module darksocv
     
     // ro/rw memories
 
-    reg [31:0] MEM [0:2047]; // ro memory
+    reg [31:0] MEM [0:128*1024/4-1]; // ro memory
 
     // memory initialization
 
     integer i;
     initial
     begin
-        for(i=0;i!=2048;i=i+1)
+        for(i=0;i!=128*1024/4-1;i=i+1)
         begin
             MEM[i] = 32'd0;
         end

@@ -132,7 +132,7 @@
 // be better allocated, but in this case is not possible protect the .text
 // area as in the case of separate memory banks.
 
-`define __FLEXBUZZ__
+//`define __FLEXBUZZ__
 
 // flexbuzz interface (experimental):
 //

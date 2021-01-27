@@ -47,7 +47,17 @@ ifndef CROSS
     
     CCPATH = /opt/riscv32/bin
     #CCPATH = /usr/local/share/toolchain-$(CROSS)/bin
-    #HARVARD = 1
+    #HARVARD = 
+	
+	ARCHI = RV32I
+	TEST_DIR_TARGET = tests/$(ARCHI)/
+	MARCH=rv32i
+	MABI=ilp32
+
+	RISCV_GNU_TOOLCHAIN_INSTALL_PREFIX = /opt/riscv32
+
+TOOLCHAIN_PREFIX = $(RISCV_GNU_TOOLCHAIN_INSTALL_PREFIX)/bin/riscv32-unknown-elf-
+
 endif
 
 ifndef BUILD
@@ -61,7 +71,7 @@ endif
     OD = $(CCPATH)/$(CROSS)-objdump
    CPP = $(CCPATH)/$(CROSS)-cpp
 
-CCFLAGS = -Wall -I./include -Os -march=$(ARCH) -mabi=ilp32e -D__RISCV__ -DBUILD="\"$(BUILD)\"" -DARCH="\"$(ARCH)\""
+CCFLAGS = -Wall -I./include -Os -march=$(ARCH) -mabi=ilp32 -D__RISCV__ -DBUILD="\"$(BUILD)\"" -DARCH="\"$(ARCH)\""
 ASFLAGS = -march=$(ARCH)
 LDFLAGS = -T$(PROJ).ld -Map=$(PROJ).map -m elf32lriscv # -Ttext=0
 CPFLAGS = -P 
@@ -76,8 +86,8 @@ OCFLAGS = -O binary # --reverse-bytes=4 # workaround for darkriscv big-endian bl
 ODFLAGS = -d
 
 PROJ = darksocv
-OBJS = boot.o stdio.o main.o io.o banner.o
-ASMS = boot.s stdio.s main.s io.s banner.s
+OBJS = boot.o stdio.o main.o io.o banner.o #tests/start.o $(addsuffix .o,$(basename $(wildcard tests/$(ARCHI)/*.S)))
+ASMS = boot.s stdio.s main.s io.s banner.s #tests/start.S $(basename $(wildcard tests/$(ARCHI)/*.S))
 SRCS = boot.c stdio.c main.c io.c banner.c
 
 #include app/Makefile.in
@@ -96,10 +106,25 @@ all: $(TARGETS) $(DEPS)
 	echo sources ok.
 
 clean:
-	#-rm *.s *.o $(PROJ).{bin,lst,map,ram,rom,x86,text,data,bin,ld}
+	-rm *.o main.s boot.s banner.s stdio.s darksocv.mem $(PROJ).{bin,lst,map,ram,rom,x86,text,data,bin,ld}
+	rm -r tests/RV32I/*.o
+	rm tests/start.o
 
 %.o: %.s
 	$(AS) $(ASFLAGS) -c $< -o $@
+
+tests/start.o: tests/start.S
+	$(TOOLCHAIN_PREFIX)gcc -c -march=${MARCH} -mabi=${MABI} -o $@ $(GCC_FLAGS) $<
+
+
+$(addsuffix %.o,$(basename $(TEST_DIR_TARGET))): $(addsuffix %.S,$(basename $(TEST_DIR_TARGET))) tests/$(ARCH)/riscv_test.h tests/$(ARCH)/test_macros.h
+	$(TOOLCHAIN_PREFIX)gcc -c -march=${MARCH} -mabi=${MABI} -o $@ -DTEST_FUNC_NAME=$(notdir $(basename $<)) \
+		-DTEST_FUNC_TXT='"$(notdir $(basename $<))"' -DTEST_FUNC_RET=$(notdir $(basename $<))_ret $<
+
+
+
+
+
 
 %.s: %.c
 	$(CC) $(CCFLAGS) -S $< -o $@
@@ -108,8 +133,10 @@ $(PROJ).ld: $(PROJ).ld.src
 	$(CPP) $(CPFLAGS) $(PROJ).ld.src $(PROJ).ld
 	
 $(PROJ).o: $(OBJS) $(PROJ).ld
-	$(LD) $(LDFLAGS) $(OBJS) -o $@
+	$(LD) $(LDFLAGS) -Os $(OBJS) -o $@
 	$(OD) $(ODFLAGS) $@ > $(PROJ).lst
+
+
 
 $(PROJ).rom.mem: $(PROJ).o
 	$(OC) $(OCFLAGS) $< $(PROJ).text --only-section .text* 

@@ -38,7 +38,7 @@ void boot(void)
 {
     int tmp = 1&threads++;
 
-    io.irq = IRQ_TIMR; // clear interrupt
+    //io.irq = IRQ_TIMR; // clear interrupt
 
     // thread #0
 

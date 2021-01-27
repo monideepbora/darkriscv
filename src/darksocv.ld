@@ -1,7 +1,7 @@
 MEMORY
 {
     IO (rw!x) : ORIGIN = 0x80000000, LENGTH = 0x10
-    MEM (rwx) : ORIGIN = 0x00000000, LENGTH = 0x2000
+    MEM (rwx) : ORIGIN = 0x00000000, LENGTH = 0x00018000
 }
 SECTIONS
 {
@@ -21,6 +21,6 @@ SECTIONS
         *(.data)
         *(.bss)
         *(.rela*)
- *(COMMON)
+        *(COMMON)
     } > MEM
 }

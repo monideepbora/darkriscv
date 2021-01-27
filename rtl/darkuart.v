@@ -122,6 +122,14 @@ module darkuart
     begin
         if(WR)
         begin
+
+            if(&BE)
+            begin
+                $write("%c",DATAI[7:0]);  
+            end
+
+
+
             if(BE[1])
             begin
                 UART_XFIFO <= DATAI[15:8];
@@ -131,6 +139,12 @@ module darkuart
                 begin
                     $write("%c",DATAI[15:8]);
                 end
+
+                 begin
+                $write("%c",DATAI[7:0]);  
+            end   
+
+                
                 
                 if(DATAI[15:8]=="#") // break point
                 begin

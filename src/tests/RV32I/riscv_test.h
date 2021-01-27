@@ -34,6 +34,7 @@ TEST_FUNC_NAME:				\
 	sw	a1,0(a2);
 
 #define RVTEST_PASS			\
+	call success; \
 	lui	a0,0x10000000>>12;	\
 	addi	a1,zero,'O';		\
 	addi	a2,zero,'K';		\

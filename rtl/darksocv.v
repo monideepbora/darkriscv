@@ -77,6 +77,8 @@ module darksocv
         // workaround for vivado: no path in simulation and .mem extension
 
         $readmemh("../src/darksocv.mem",MEM);
+        //$readmemh("../tests/firmware.hex",MEM);
+            
     end
     // darkriscv bus interface
 

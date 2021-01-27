@@ -71,7 +71,7 @@ endif
     OD = $(CCPATH)/$(CROSS)-objdump
    CPP = $(CCPATH)/$(CROSS)-cpp
 
-CCFLAGS = -Wall -I./include -Os -march=$(ARCH) -mabi=ilp32 -D__RISCV__ -DBUILD="\"$(BUILD)\"" -DARCH="\"$(ARCH)\""
+CCFLAGS = -Wall -fcommon -I./include -Os -march=$(ARCH) -mabi=ilp32 -D__RISCV__ -DBUILD="\"$(BUILD)\"" -DARCH="\"$(ARCH)\""
 ASFLAGS = -march=$(ARCH)
 LDFLAGS = -T$(PROJ).ld -Map=$(PROJ).map -m elf32lriscv # -Ttext=0
 CPFLAGS = -P 
@@ -87,7 +87,7 @@ ODFLAGS = -d
 
 PROJ = darksocv
 OBJS = boot.o stdio.o main.o io.o banner.o #tests/start.o $(addsuffix .o,$(basename $(wildcard tests/$(ARCHI)/*.S)))
-ASMS = boot.s stdio.s main.s io.s banner.s #tests/start.S $(basename $(wildcard tests/$(ARCHI)/*.S))
+ASMS = boot.s stdio.s main.s io.s banner.s #tests/start.S #$(basename $(wildcard tests/$(ARCHI)/*.S))
 SRCS = boot.c stdio.c main.c io.c banner.c
 
 #include app/Makefile.in

@@ -53,7 +53,7 @@ int main(void)
 
     usleep(10);
 
- //   __asm__ volatile("j start;");
+    __asm__ volatile("j start;");
    
 
 //     __asm__ volatile ("lui	a0,0x8100000D>>12;	\
@@ -229,5 +229,6 @@ int main(void)
 
 void success()
 {
-    printf("Success");
+    printf("Success >");
+    printf("> ");
 }

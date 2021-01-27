@@ -1,11 +1,49 @@
 	.file	"io.c"
 	.option nopic
+	.attribute arch, "rv32i2p0"
+	.attribute unaligned_access, 0
+	.attribute stack_align, 16
+	.text
+	.section	.rodata.str1.4,"aMS",@progbits,1
+	.align	2
+.LC0:
+	.string	"qmtech artix7 a35"
+	.align	2
+.LC1:
+	.string	"digilent spartan3 s200"
+	.align	2
+.LC2:
+	.string	"simulation only"
+	.align	2
+.LC3:
+	.string	"avnet microboard lx9"
+	.align	2
+.LC4:
+	.string	"xilinx ac701 a200"
+	.align	2
+.LC5:
+	.string	"qmtech sdram lx16"
+	.align	2
+.LC6:
+	.string	"qmtech spartan7 s15"
+	.align	2
+.LC7:
+	.string	"lattice brevia2 lxp2"
+	.align	2
+.LC8:
+	.string	"piswords rs485 lx9"
+	.align	2
+.LC9:
+	.string	"aliexpress hpc/40gbe k420"
+	.align	2
+.LC10:
+	.string	"unknown"
 	.text
 	.align	2
 	.globl	board_name
 	.type	board_name, @function
 board_name:
-	beqz	a0,.L3
+	beq	a0,zero,.L3
 	li	a5,1
 	beq	a0,a5,.L4
 	li	a5,2
@@ -71,38 +109,6 @@ board_name:
 	.globl	utimers
 	.globl	threads
 	.comm	io,16,4
-	.section	.rodata.str1.4,"aMS",@progbits,1
-	.align	2
-.LC0:
-	.string	"qmtech artix7 a35"
-	.zero	2
-.LC1:
-	.string	"digilent spartan3 s200"
-	.zero	1
-.LC2:
-	.string	"simulation only"
-.LC3:
-	.string	"avnet microboard lx9"
-	.zero	3
-.LC4:
-	.string	"xilinx ac701 a200"
-	.zero	2
-.LC5:
-	.string	"qmtech sdram lx16"
-	.zero	2
-.LC6:
-	.string	"qmtech spartan7 s15"
-.LC7:
-	.string	"lattice brevia2 lxp2"
-	.zero	3
-.LC8:
-	.string	"piswords rs485 lx9"
-	.zero	1
-.LC9:
-	.string	"aliexpress hpc/40gbe k420"
-	.zero	2
-.LC10:
-	.string	"unknown"
 	.section	.sbss,"aw",@nobits
 	.align	2
 	.type	utimers, @object
@@ -113,4 +119,4 @@ utimers:
 	.size	threads, 4
 threads:
 	.zero	4
-	.ident	"GCC: (GNU) 9.0.0 20180818 (experimental)"
+	.ident	"GCC: (GNU) 10.2.0"

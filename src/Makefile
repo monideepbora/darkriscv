@@ -56,7 +56,10 @@ ifndef CROSS
 
 	RISCV_GNU_TOOLCHAIN_INSTALL_PREFIX = /opt/riscv32
 
-TOOLCHAIN_PREFIX = $(RISCV_GNU_TOOLCHAIN_INSTALL_PREFIX)/bin/riscv32-unknown-elf-
+	GCC_FLAGS = -UMUL
+	INTEGER_INST = 1
+
+	TOOLCHAIN_PREFIX = $(RISCV_GNU_TOOLCHAIN_INSTALL_PREFIX)/bin/riscv32-unknown-elf-
 
 endif
 
@@ -86,7 +89,7 @@ OCFLAGS = -O binary # --reverse-bytes=4 # workaround for darkriscv big-endian bl
 ODFLAGS = -d
 
 PROJ = darksocv
-OBJS = boot.o stdio.o main.o io.o banner.o #tests/start.o $(addsuffix .o,$(basename $(wildcard tests/$(ARCHI)/*.S)))
+OBJS = boot.o stdio.o tests/start.o main.o io.o banner.o tests/RV32I/lui.o #$(addsuffix .o,$(basename $(wildcard tests/$(ARCHI)/*.S)))
 ASMS = boot.s stdio.s main.s io.s banner.s #tests/start.S #$(basename $(wildcard tests/$(ARCHI)/*.S))
 SRCS = boot.c stdio.c main.c io.c banner.c
 
@@ -106,7 +109,7 @@ all: $(TARGETS) $(DEPS)
 	echo sources ok.
 
 clean:
-	-rm *.o main.s boot.s banner.s stdio.s darksocv.mem $(PROJ).{bin,lst,map,ram,rom,x86,text,data,bin,ld}
+	-rm *.o main.s boot.s banner.s io.s stdio.s darksocv.mem $(PROJ).{bin,lst,map,ram,rom,x86,text,data,bin,ld}
 	rm -r tests/RV32I/*.o
 	rm tests/start.o
 
@@ -117,8 +120,8 @@ tests/start.o: tests/start.S
 	$(TOOLCHAIN_PREFIX)gcc -c -march=${MARCH} -mabi=${MABI} -o $@ $(GCC_FLAGS) $<
 
 
-$(addsuffix %.o,$(basename $(TEST_DIR_TARGET))): $(addsuffix %.S,$(basename $(TEST_DIR_TARGET))) tests/$(ARCH)/riscv_test.h tests/$(ARCH)/test_macros.h
-	$(TOOLCHAIN_PREFIX)gcc -c -march=${MARCH} -mabi=${MABI} -o $@ -DTEST_FUNC_NAME=$(notdir $(basename $<)) \
+$(addsuffix %.o,$(basename $(TEST_DIR_TARGET))): $(addsuffix %.S,$(basename $(TEST_DIR_TARGET))) tests/$(ARCHI)/riscv_test.h tests/$(ARCHI)/test_macros.h
+	$(TOOLCHAIN_PREFIX)gcc -fcommon -c -march=${MARCH} -mabi=${MABI} -o $@ -DTEST_FUNC_NAME=$(notdir $(basename $<)) \
 		-DTEST_FUNC_TXT='"$(notdir $(basename $<))"' -DTEST_FUNC_RET=$(notdir $(basename $<))_ret $<
 
 

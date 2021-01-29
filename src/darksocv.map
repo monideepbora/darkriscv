@@ -19,7 +19,7 @@ Linker script and memory map
  COMMON         0x0000000080000000       0x10 io.o
                 0x0000000080000000                io
 
-.text           0x0000000000000000      0xad4
+.text           0x0000000000000000      0xd7c
  boot.o(.text)
  .text          0x0000000000000000       0x98 boot.o
                 0x0000000000000000                boot
@@ -64,62 +64,76 @@ Linker script and memory map
                 0x0000000000000924                failure
                 0x0000000000000930                OK
  tests/start.o(.text)
- .text          0x000000000000093c       0xb0 tests/start.o
+ .text          0x000000000000093c       0xb8 tests/start.o
                 0x0000000000000940                start
                 0x00000000000009c4                lui_ret
+                0x00000000000009cc                auipc_ret
+                0x00000000000009d4                j_ret
+                0x00000000000009dc                jal_ret
  *(.text)
- .text          0x00000000000009ec       0xe8 tests/RV32I/lui.o
-                0x00000000000009ec                lui
-                0x0000000000000ad4                end = .
-                0x0000000000000ad4                . = ALIGN (0x4)
+ *fill*         0x00000000000009f4        0x4 
+ .text          0x00000000000009f8       0xe0 tests/RV32I/auipc.o
+                0x00000000000009f8                auipc
+ .text          0x0000000000000ad8       0xcc tests/RV32I/j.o
+                0x0000000000000ad8                j
+ .text          0x0000000000000ba4       0xf0 tests/RV32I/lui.o
+                0x0000000000000ba4                lui
+ .text          0x0000000000000c94       0xe8 tests/RV32I/jal.o
+                0x0000000000000c94                jal
 
-.text.startup   0x0000000000000ad4      0x19c
- .text.startup  0x0000000000000ad4      0x19c main.o
-                0x0000000000000ad4                main
+.text.startup   0x0000000000000d7c      0x19c
+ .text.startup  0x0000000000000d7c      0x19c main.o
+                0x0000000000000d7c                main
 
-.data           0x0000000000000c70      0x390
+.data           0x0000000000000f18      0x390
  *(.sbss)
- .sbss          0x0000000000000c70        0x8 io.o
-                0x0000000000000c70                utimers
-                0x0000000000000c74                threads
- .sbss          0x0000000000000c78        0x4 stdio.o
+ .sbss          0x0000000000000f18        0x8 io.o
+                0x0000000000000f18                utimers
+                0x0000000000000f1c                threads
+ .sbss          0x0000000000000f20        0x4 stdio.o
  *(.rodata*)
  .rodata.str1.4
-                0x0000000000000c7c       0xe0 io.o
+                0x0000000000000f24       0xe0 io.o
  .rodata.str1.4
-                0x0000000000000d5c       0x21 boot.o
- *fill*         0x0000000000000d7d        0x3 
+                0x0000000000001004       0x21 boot.o
+ *fill*         0x0000000000001025        0x3 
  .rodata.str1.4
-                0x0000000000000d80       0x19 stdio.o
- *fill*         0x0000000000000d99        0x3 
- .rodata        0x0000000000000d9c       0x40 stdio.o
+                0x0000000000001028       0x19 stdio.o
+ *fill*         0x0000000000001041        0x3 
+ .rodata        0x0000000000001044       0x40 stdio.o
  .rodata.str1.4
-                0x0000000000000ddc      0x10d banner.o
- *fill*         0x0000000000000ee9        0x3 
+                0x0000000000001084      0x10d banner.o
+ *fill*         0x0000000000001191        0x3 
  .rodata.str1.4
-                0x0000000000000eec      0x112 main.o
+                0x0000000000001194      0x112 main.o
                                         0x116 (size before relaxing)
  *(.data)
- .data          0x0000000000000ffe        0x0 io.o
- .data          0x0000000000000ffe        0x0 boot.o
- .data          0x0000000000000ffe        0x0 stdio.o
- .data          0x0000000000000ffe        0x0 banner.o
- .data          0x0000000000000ffe        0x0 main.o
- .data          0x0000000000000ffe        0x0 tests/start.o
- *fill*         0x0000000000000ffe        0x2 
- .data          0x0000000000001000        0x0 tests/RV32I/lui.o
+ .data          0x00000000000012a6        0x0 io.o
+ .data          0x00000000000012a6        0x0 boot.o
+ .data          0x00000000000012a6        0x0 stdio.o
+ .data          0x00000000000012a6        0x0 banner.o
+ .data          0x00000000000012a6        0x0 main.o
+ .data          0x00000000000012a6        0x0 tests/start.o
+ *fill*         0x00000000000012a6        0x2 
+ .data          0x00000000000012a8        0x0 tests/RV32I/auipc.o
+ .data          0x00000000000012a8        0x0 tests/RV32I/j.o
+ .data          0x00000000000012a8        0x0 tests/RV32I/lui.o
+ .data          0x00000000000012a8        0x0 tests/RV32I/jal.o
  *(.bss)
- .bss           0x0000000000001000        0x0 io.o
- .bss           0x0000000000001000        0x0 boot.o
- .bss           0x0000000000001000        0x0 stdio.o
- .bss           0x0000000000001000        0x0 banner.o
- .bss           0x0000000000001000        0x0 main.o
- .bss           0x0000000000001000        0x0 tests/start.o
- .bss           0x0000000000001000        0x0 tests/RV32I/lui.o
+ .bss           0x00000000000012a8        0x0 io.o
+ .bss           0x00000000000012a8        0x0 boot.o
+ .bss           0x00000000000012a8        0x0 stdio.o
+ .bss           0x00000000000012a8        0x0 banner.o
+ .bss           0x00000000000012a8        0x0 main.o
+ .bss           0x00000000000012a8        0x0 tests/start.o
+ .bss           0x00000000000012a8        0x0 tests/RV32I/auipc.o
+ .bss           0x00000000000012a8        0x0 tests/RV32I/j.o
+ .bss           0x00000000000012a8        0x0 tests/RV32I/lui.o
+ .bss           0x00000000000012a8        0x0 tests/RV32I/jal.o
  *(.rela*)
- .rela.text     0x0000000000001000        0x0 io.o
+ .rela.text     0x00000000000012a8        0x0 io.o
  .rela.text.startup
-                0x0000000000001000        0x0 io.o
+                0x00000000000012a8        0x0 io.o
  *(COMMON)
 LOAD boot.o
 LOAD stdio.o
@@ -127,7 +141,10 @@ LOAD main.o
 LOAD io.o
 LOAD banner.o
 LOAD tests/start.o
+LOAD tests/RV32I/auipc.o
+LOAD tests/RV32I/j.o
 LOAD tests/RV32I/lui.o
+LOAD tests/RV32I/jal.o
 OUTPUT(darksocv.o elf32-littleriscv)
 
 .comment        0x0000000000000000       0x12
@@ -153,4 +170,10 @@ OUTPUT(darksocv.o elf32-littleriscv)
  .riscv.attributes
                 0x000000000000008c       0x1a tests/start.o
  .riscv.attributes
-                0x00000000000000a6       0x1a tests/RV32I/lui.o
+                0x00000000000000a6       0x1a tests/RV32I/auipc.o
+ .riscv.attributes
+                0x00000000000000c0       0x1a tests/RV32I/j.o
+ .riscv.attributes
+                0x00000000000000da       0x1a tests/RV32I/lui.o
+ .riscv.attributes
+                0x00000000000000f4       0x1a tests/RV32I/jal.o

@@ -22,8 +22,8 @@ SECTIONS
         main.o(.text);
         tests/start.o(.text);
         *(.text);
-        end = .;
-		. = ALIGN(4);
+        /*end = .;
+		. = ALIGN(4);*/
     } > MEM
     .data :
     {

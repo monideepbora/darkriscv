@@ -83,11 +83,10 @@ start:
 	n ## _ret:
 
 	TEST(lui)
-/*	TEST(auipc)
+	TEST(auipc)
 	TEST(j)
 	TEST(jal)
-	TEST(jalr)
-
+/*	TEST(jalr)
 	TEST(beq)
 	TEST(bne)
 	TEST(blt)
@@ -138,13 +137,13 @@ start:
 
 	TEST(simple) */
 
-	/* set stack pointer */
-	lui sp,(128*1024)>>12
+	/* set stack pointer 
+	lui sp,(128*1024)>>12*/
 
-	/* set gp and tp */
+	/* set gp and tp 
 	lui gp, %hi(0xdeadbeef)
 	addi gp, gp, %lo(0xdeadbeef)
-	addi tp, gp, 0
+	addi tp, gp, 0*/
 
 	/* print "DONE\n" */
 	/*lui a0,0x10000000>>12

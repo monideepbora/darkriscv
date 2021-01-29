@@ -19,6 +19,9 @@ reset_vec:
 start:
 	/* zero-initialize all registers */
 
+
+	/*li a0,63
+	call putchar*/
 	addi x1, zero, 0
 	addi x2, zero, 0
 	addi x3, zero, 0

@@ -64,53 +64,53 @@ Linker script and memory map
  .text          0x0000000000000a1c       0xe4 tests/RV32I/lui.o
                 0x0000000000000a1c                lui
 
-.text.startup   0x0000000000000b00      0x19c
- .text.startup  0x0000000000000b00      0x19c main.o
+.text.startup   0x0000000000000b00      0x1a4
+ .text.startup  0x0000000000000b00      0x1a4 main.o
                 0x0000000000000b00                main
 
-.data           0x0000000000000c9c      0x380
+.data           0x0000000000000ca4      0x37c
  *(.sbss)
- .sbss          0x0000000000000c9c        0x8 io.o
-                0x0000000000000c9c                utimers
-                0x0000000000000ca0                threads
- .sbss          0x0000000000000ca4        0x4 stdio.o
+ .sbss          0x0000000000000ca4        0x8 io.o
+                0x0000000000000ca4                utimers
+                0x0000000000000ca8                threads
+ .sbss          0x0000000000000cac        0x4 stdio.o
  *(.rodata*)
  .rodata.str1.4
-                0x0000000000000ca8       0xe0 io.o
+                0x0000000000000cb0       0xe0 io.o
  .rodata.str1.4
-                0x0000000000000d88       0x21 boot.o
- *fill*         0x0000000000000da9        0x3 
+                0x0000000000000d90       0x21 boot.o
+ *fill*         0x0000000000000db1        0x3 
  .rodata.str1.4
-                0x0000000000000dac       0x19 stdio.o
- *fill*         0x0000000000000dc5        0x3 
- .rodata        0x0000000000000dc8       0x40 stdio.o
+                0x0000000000000db4       0x19 stdio.o
+ *fill*         0x0000000000000dcd        0x3 
+ .rodata        0x0000000000000dd0       0x40 stdio.o
  .rodata.str1.4
-                0x0000000000000e08      0x103 main.o
-                                        0x107 (size before relaxing)
- *fill*         0x0000000000000f0b        0x1 
+                0x0000000000000e10       0xfd main.o
+                                        0x101 (size before relaxing)
+ *fill*         0x0000000000000f0d        0x3 
  .rodata.str1.4
-                0x0000000000000f0c      0x10d banner.o
+                0x0000000000000f10      0x10d banner.o
  *(.data)
- .data          0x0000000000001019        0x0 io.o
- .data          0x0000000000001019        0x0 boot.o
- .data          0x0000000000001019        0x0 stdio.o
- .data          0x0000000000001019        0x0 tests/start.o
- .data          0x0000000000001019        0x0 main.o
- .data          0x0000000000001019        0x0 banner.o
- *fill*         0x0000000000001019        0x3 
- .data          0x000000000000101c        0x0 tests/RV32I/lui.o
+ .data          0x000000000000101d        0x0 io.o
+ .data          0x000000000000101d        0x0 boot.o
+ .data          0x000000000000101d        0x0 stdio.o
+ .data          0x000000000000101d        0x0 tests/start.o
+ .data          0x000000000000101d        0x0 main.o
+ .data          0x000000000000101d        0x0 banner.o
+ *fill*         0x000000000000101d        0x3 
+ .data          0x0000000000001020        0x0 tests/RV32I/lui.o
  *(.bss)
- .bss           0x000000000000101c        0x0 io.o
- .bss           0x000000000000101c        0x0 boot.o
- .bss           0x000000000000101c        0x0 stdio.o
- .bss           0x000000000000101c        0x0 tests/start.o
- .bss           0x000000000000101c        0x0 main.o
- .bss           0x000000000000101c        0x0 banner.o
- .bss           0x000000000000101c        0x0 tests/RV32I/lui.o
+ .bss           0x0000000000001020        0x0 io.o
+ .bss           0x0000000000001020        0x0 boot.o
+ .bss           0x0000000000001020        0x0 stdio.o
+ .bss           0x0000000000001020        0x0 tests/start.o
+ .bss           0x0000000000001020        0x0 main.o
+ .bss           0x0000000000001020        0x0 banner.o
+ .bss           0x0000000000001020        0x0 tests/RV32I/lui.o
  *(.rela*)
- .rela.text     0x000000000000101c        0x0 io.o
+ .rela.text     0x0000000000001020        0x0 io.o
  .rela.text.startup
-                0x000000000000101c        0x0 io.o
+                0x0000000000001020        0x0 io.o
  *(COMMON)
 LOAD boot.o
 LOAD stdio.o

@@ -53,6 +53,9 @@ int main(void)
 
     usleep(10);
 
+     __asm__ volatile("li a0,63; \
+	call putchar; ");
+
     __asm__ volatile("j start;");
    
 
@@ -229,6 +232,11 @@ int main(void)
 
 void success()
 {
-    printf("Success >");
-    printf("> ");
+
+    printf("Success ");
+    // putchar('M');
+    // putchar('O');
+
+    __asm__ volatile("li a0,62; \
+	call putchar; ");
 }

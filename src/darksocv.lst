@@ -6,7 +6,7 @@ Disassembly of section .text:
 
 00000000 <boot>:
    0:	00001737          	lui	a4,0x1
-   4:	ca072783          	lw	a5,-864(a4) # ca0 <threads>
+   4:	ca872783          	lw	a5,-856(a4) # ca8 <threads>
    8:	fe010113          	addi	sp,sp,-32
    c:	00812c23          	sw	s0,24(sp)
   10:	00178693          	addi	a3,a5,1
@@ -14,33 +14,33 @@ Disassembly of section .text:
   18:	00112e23          	sw	ra,28(sp)
   1c:	00912a23          	sw	s1,20(sp)
   20:	01212823          	sw	s2,16(sp)
-  24:	cad72023          	sw	a3,-864(a4)
+  24:	cad72423          	sw	a3,-856(a4)
   28:	00f12623          	sw	a5,12(sp)
   2c:	00001437          	lui	s0,0x1
   30:	04078463          	beqz	a5,78 <boot+0x78>
   34:	800007b7          	lui	a5,0x80000
   38:	000f46b7          	lui	a3,0xf4
   3c:	00078793          	mv	a5,a5
-  40:	23f68693          	addi	a3,a3,575 # f423f <nxt.0+0xf359b>
+  40:	23f68693          	addi	a3,a3,575 # f423f <nxt.0+0xf3593>
   44:	f8000613          	li	a2,-128
-  48:	c9c42703          	lw	a4,-868(s0) # c9c <utimers>
+  48:	ca442703          	lw	a4,-860(s0) # ca4 <utimers>
   4c:	fff70593          	addi	a1,a4,-1
-  50:	c8b42e23          	sw	a1,-868(s0)
+  50:	cab42223          	sw	a1,-860(s0)
   54:	00071e63          	bnez	a4,70 <boot+0x70>
   58:	0087d703          	lhu	a4,8(a5) # 80000008 <io+0x8>
   5c:	00170713          	addi	a4,a4,1
   60:	01071713          	slli	a4,a4,0x10
   64:	01075713          	srli	a4,a4,0x10
   68:	00e79423          	sh	a4,8(a5)
-  6c:	c8d42e23          	sw	a3,-868(s0)
+  6c:	cad42223          	sw	a3,-860(s0)
   70:	00c781a3          	sb	a2,3(a5)
   74:	fd5ff06f          	j	48 <boot+0x48>
   78:	000014b7          	lui	s1,0x1
   7c:	131000ef          	jal	ra,9ac <banner>
   80:	01c10693          	addi	a3,sp,28
-  84:	c9c40613          	addi	a2,s0,-868
+  84:	ca440613          	addi	a2,s0,-860
   88:	00000593          	li	a1,0
-  8c:	d8848513          	addi	a0,s1,-632 # d88 <nxt.0+0xe4>
+  8c:	d9048513          	addi	a0,s1,-624 # d90 <nxt.0+0xe4>
   90:	368000ef          	jal	ra,3f8 <printf>
   94:	26d000ef          	jal	ra,b00 <main>
   98:	fe5ff06f          	j	7c <boot+0x7c>
@@ -66,37 +66,37 @@ Disassembly of section .text:
   e0:	00900793          	li	a5,9
   e4:	06f50e63          	beq	a0,a5,160 <board_name+0xc4>
   e8:	00001537          	lui	a0,0x1
-  ec:	d8050513          	addi	a0,a0,-640 # d80 <nxt.0+0xdc>
+  ec:	d8850513          	addi	a0,a0,-632 # d88 <nxt.0+0xdc>
   f0:	00008067          	ret
   f4:	00001537          	lui	a0,0x1
-  f8:	cd450513          	addi	a0,a0,-812 # cd4 <nxt.0+0x30>
+  f8:	cdc50513          	addi	a0,a0,-804 # cdc <nxt.0+0x30>
   fc:	00008067          	ret
  100:	00001537          	lui	a0,0x1
- 104:	ce450513          	addi	a0,a0,-796 # ce4 <nxt.0+0x40>
+ 104:	cec50513          	addi	a0,a0,-788 # cec <nxt.0+0x40>
  108:	00008067          	ret
  10c:	00001537          	lui	a0,0x1
- 110:	cfc50513          	addi	a0,a0,-772 # cfc <nxt.0+0x58>
+ 110:	d0450513          	addi	a0,a0,-764 # d04 <nxt.0+0x58>
  114:	00008067          	ret
  118:	00001537          	lui	a0,0x1
- 11c:	d1050513          	addi	a0,a0,-752 # d10 <nxt.0+0x6c>
+ 11c:	d1850513          	addi	a0,a0,-744 # d18 <nxt.0+0x6c>
  120:	00008067          	ret
  124:	00001537          	lui	a0,0x1
- 128:	d2450513          	addi	a0,a0,-732 # d24 <nxt.0+0x80>
+ 128:	d2c50513          	addi	a0,a0,-724 # d2c <nxt.0+0x80>
  12c:	00008067          	ret
  130:	00001537          	lui	a0,0x1
- 134:	d3850513          	addi	a0,a0,-712 # d38 <nxt.0+0x94>
+ 134:	d4050513          	addi	a0,a0,-704 # d40 <nxt.0+0x94>
  138:	00008067          	ret
  13c:	00001537          	lui	a0,0x1
- 140:	d5050513          	addi	a0,a0,-688 # d50 <nxt.0+0xac>
+ 140:	d5850513          	addi	a0,a0,-680 # d58 <nxt.0+0xac>
  144:	00008067          	ret
  148:	00001537          	lui	a0,0x1
- 14c:	cbc50513          	addi	a0,a0,-836 # cbc <nxt.0+0x18>
+ 14c:	cc450513          	addi	a0,a0,-828 # cc4 <nxt.0+0x18>
  150:	00008067          	ret
  154:	00001537          	lui	a0,0x1
- 158:	d6450513          	addi	a0,a0,-668 # d64 <nxt.0+0xc0>
+ 158:	d6c50513          	addi	a0,a0,-660 # d6c <nxt.0+0xc0>
  15c:	00008067          	ret
  160:	00001537          	lui	a0,0x1
- 164:	ca850513          	addi	a0,a0,-856 # ca8 <nxt.0+0x4>
+ 164:	cb050513          	addi	a0,a0,-848 # cb0 <nxt.0+0x4>
  168:	00008067          	ret
 
 0000016c <getchar>:
@@ -186,7 +186,7 @@ Disassembly of section .text:
  2a0:	00050413          	mv	s0,a0
  2a4:	00051663          	bnez	a0,2b0 <putstr+0x1c>
  2a8:	00001437          	lui	s0,0x1
- 2ac:	dac40413          	addi	s0,s0,-596 # dac <nxt.0+0x108>
+ 2ac:	db440413          	addi	s0,s0,-588 # db4 <nxt.0+0x108>
  2b0:	00044503          	lbu	a0,0(s0)
  2b4:	00051a63          	bnez	a0,2c8 <putstr+0x34>
  2b8:	00c12083          	lw	ra,12(sp)
@@ -213,9 +213,9 @@ Disassembly of section .text:
  2fc:	000015b7          	lui	a1,0x1
  300:	04812c23          	sw	s0,88(sp)
  304:	04912a23          	sw	s1,84(sp)
- 308:	dc858413          	addi	s0,a1,-568 # dc8 <nxt.0+0x124>
+ 308:	dd058413          	addi	s0,a1,-560 # dd0 <nxt.0+0x124>
  30c:	02c00613          	li	a2,44
- 310:	dc858593          	addi	a1,a1,-568
+ 310:	dd058593          	addi	a1,a1,-560
  314:	00050493          	mv	s1,a0
  318:	01410513          	addi	a0,sp,20
  31c:	04112e23          	sw	ra,92(sp)
@@ -233,7 +233,7 @@ Disassembly of section .text:
  34c:	00001937          	lui	s2,0x1
  350:	01800993          	li	s3,24
  354:	00100a93          	li	s5,1
- 358:	db490913          	addi	s2,s2,-588 # db4 <nxt.0+0x110>
+ 358:	dbc90913          	addi	s2,s2,-580 # dbc <nxt.0+0x110>
  35c:	00042583          	lw	a1,0(s0)
  360:	02059463          	bnez	a1,388 <putdx+0x98>
  364:	05c12083          	lw	ra,92(sp)
@@ -406,13 +406,13 @@ Disassembly of section .text:
  5b8:	00050993          	mv	s3,a0
  5bc:	00041863          	bnez	s0,5cc <strtok+0x3c>
  5c0:	000017b7          	lui	a5,0x1
- 5c4:	ca47a403          	lw	s0,-860(a5) # ca4 <nxt.0>
+ 5c4:	cac7a403          	lw	s0,-852(a5) # cac <nxt.0>
  5c8:	04040063          	beqz	s0,608 <strtok+0x78>
  5cc:	00040493          	mv	s1,s0
  5d0:	0004c783          	lbu	a5,0(s1)
  5d4:	00079863          	bnez	a5,5e4 <strtok+0x54>
  5d8:	000017b7          	lui	a5,0x1
- 5dc:	ca07a223          	sw	zero,-860(a5) # ca4 <nxt.0>
+ 5dc:	ca07a623          	sw	zero,-852(a5) # cac <nxt.0>
  5e0:	0280006f          	j	608 <strtok+0x78>
  5e4:	00098613          	mv	a2,s3
  5e8:	00090593          	mv	a1,s2
@@ -422,7 +422,7 @@ Disassembly of section .text:
  5f8:	02051863          	bnez	a0,628 <strtok+0x98>
  5fc:	00001737          	lui	a4,0x1
  600:	00048023          	sb	zero,0(s1)
- 604:	caf72223          	sw	a5,-860(a4) # ca4 <nxt.0>
+ 604:	caf72623          	sw	a5,-852(a4) # cac <nxt.0>
  608:	01c12083          	lw	ra,28(sp)
  60c:	00040513          	mv	a0,s0
  610:	01812403          	lw	s0,24(sp)
@@ -593,7 +593,7 @@ Disassembly of section .text:
 
 00000848 <usleep>:
  848:	000017b7          	lui	a5,0x1
- 84c:	ca07a703          	lw	a4,-864(a5) # ca0 <threads>
+ 84c:	ca87a703          	lw	a4,-856(a5) # ca8 <threads>
  850:	00100793          	li	a5,1
  854:	00e7dc63          	bge	a5,a4,86c <usleep+0x24>
  858:	fff00713          	li	a4,-1
@@ -608,8 +608,8 @@ Disassembly of section .text:
  87c:	fff50513          	addi	a0,a0,-1
  880:	00d51c63          	bne	a0,a3,898 <usleep+0x50>
  884:	00008067          	ret
- 888:	c9c7a683          	lw	a3,-868(a5) # 7ffffc9c <io+0xfffffc9c>
- 88c:	c9c7a603          	lw	a2,-868(a5)
+ 888:	ca47a683          	lw	a3,-860(a5) # 7ffffca4 <io+0xfffffca4>
+ 88c:	ca47a603          	lw	a2,-860(a5)
  890:	fed60ee3          	beq	a2,a3,88c <usleep+0x44>
  894:	fcdff06f          	j	860 <usleep+0x18>
  898:	00c781a3          	sb	a2,3(a5)
@@ -667,34 +667,34 @@ Disassembly of section .text:
  950:	04e00693          	li	a3,78
  954:	04500713          	li	a4,69
  958:	00a00793          	li	a5,10
- 95c:	00b52023          	sw	a1,0(a0) # 10000000 <nxt.0+0xffff35c>
+ 95c:	00b52023          	sw	a1,0(a0) # 10000000 <nxt.0+0xffff354>
  960:	00c52023          	sw	a2,0(a0)
  964:	00d52023          	sw	a3,0(a0)
  968:	00e52023          	sw	a4,0(a0)
  96c:	00f52023          	sw	a5,0(a0)
  970:	20000537          	lui	a0,0x20000
  974:	075bd5b7          	lui	a1,0x75bd
- 978:	d1558593          	addi	a1,a1,-747 # 75bcd15 <nxt.0+0x75bc071>
- 97c:	00b52023          	sw	a1,0(a0) # 20000000 <nxt.0+0x1ffff35c>
+ 978:	d1558593          	addi	a1,a1,-747 # 75bcd15 <nxt.0+0x75bc069>
+ 97c:	00b52023          	sw	a1,0(a0) # 20000000 <nxt.0+0x1ffff354>
  980:	00100073          	ebreak
 
 00000984 <success>:
  984:	00001537          	lui	a0,0x1
- 988:	ff010113          	addi	sp,sp,-16 # 1fff0 <nxt.0+0x1f34c>
- 98c:	efc50513          	addi	a0,a0,-260 # efc <nxt.0+0x258>
+ 988:	ff010113          	addi	sp,sp,-16 # 1fff0 <nxt.0+0x1f344>
+ 98c:	f0450513          	addi	a0,a0,-252 # f04 <nxt.0+0x258>
  990:	00112623          	sw	ra,12(sp)
  994:	a65ff0ef          	jal	ra,3f8 <printf>
- 998:	00c12083          	lw	ra,12(sp)
- 99c:	00001537          	lui	a0,0x1
- 9a0:	f0850513          	addi	a0,a0,-248 # f08 <nxt.0+0x264>
+ 998:	03e00513          	li	a0,62
+ 99c:	ff0ff0ef          	jal	ra,18c <putchar>
+ 9a0:	00c12083          	lw	ra,12(sp)
  9a4:	01010113          	addi	sp,sp,16
- 9a8:	a51ff06f          	j	3f8 <printf>
+ 9a8:	00008067          	ret
 
 000009ac <banner>:
  9ac:	ee010113          	addi	sp,sp,-288
  9b0:	000015b7          	lui	a1,0x1
  9b4:	10d00613          	li	a2,269
- 9b8:	f0c58593          	addi	a1,a1,-244 # f0c <nxt.0+0x268>
+ 9b8:	f1058593          	addi	a1,a1,-240 # f10 <nxt.0+0x264>
  9bc:	00010513          	mv	a0,sp
  9c0:	10112e23          	sw	ra,284(sp)
  9c4:	10812c23          	sw	s0,280(sp)
@@ -728,7 +728,7 @@ Disassembly of section .text:
 00000a28 <.prname_next>:
  a28:	00050583          	lb	a1,0(a0)
  a2c:	00058a63          	beqz	a1,a40 <.prname_done>
- a30:	00b62023          	sw	a1,0(a2) # 10000000 <nxt.0+0xffff35c>
+ a30:	00b62023          	sw	a1,0(a2) # 10000000 <nxt.0+0xffff354>
  a34:	00150513          	addi	a0,a0,1
  a38:	ff1ff06f          	j	a28 <.prname_next>
 
@@ -781,7 +781,7 @@ Disassembly of section .text:
  ab4:	05200613          	li	a2,82
  ab8:	04f00693          	li	a3,79
  abc:	00a00713          	li	a4,10
- ac0:	00b52023          	sw	a1,0(a0) # 10000000 <nxt.0+0xffff35c>
+ ac0:	00b52023          	sw	a1,0(a0) # 10000000 <nxt.0+0xffff354>
  ac4:	00c52023          	sw	a2,0(a0)
  ac8:	00c52023          	sw	a2,0(a0)
  acc:	00d52023          	sw	a3,0(a0)
@@ -795,7 +795,7 @@ Disassembly of section .text:
  ae4:	04f00593          	li	a1,79
  ae8:	04b00613          	li	a2,75
  aec:	00a00693          	li	a3,10
- af0:	00b52023          	sw	a1,0(a0) # 10000000 <nxt.0+0xffff35c>
+ af0:	00b52023          	sw	a1,0(a0) # 10000000 <nxt.0+0xffff354>
  af4:	00c52023          	sw	a2,0(a0)
  af8:	00d52023          	sw	a3,0(a0)
  afc:	e39ff06f          	j	934 <lui_ret>
@@ -819,24 +819,24 @@ Disassembly of section .text.startup:
  b34:	00050593          	mv	a1,a0
  b38:	00001537          	lui	a0,0x1
  b3c:	0ff67613          	andi	a2,a2,255
- b40:	e1450513          	addi	a0,a0,-492 # e14 <nxt.0+0x170>
+ b40:	e1c50513          	addi	a0,a0,-484 # e1c <nxt.0+0x170>
  b44:	8b5ff0ef          	jal	ra,3f8 <printf>
  b48:	000015b7          	lui	a1,0x1
  b4c:	00001537          	lui	a0,0x1
- b50:	e2858593          	addi	a1,a1,-472 # e28 <nxt.0+0x184>
- b54:	e4850513          	addi	a0,a0,-440 # e48 <nxt.0+0x1a4>
+ b50:	e3058593          	addi	a1,a1,-464 # e30 <nxt.0+0x184>
+ b54:	e5050513          	addi	a0,a0,-432 # e50 <nxt.0+0x1a4>
  b58:	8a1ff0ef          	jal	ra,3f8 <printf>
  b5c:	000017b7          	lui	a5,0x1
  b60:	0014c903          	lbu	s2,1(s1)
  b64:	0024c483          	lbu	s1,2(s1)
- b68:	ca07a683          	lw	a3,-864(a5) # ca0 <threads>
+ b68:	ca87a683          	lw	a3,-856(a5) # ca8 <threads>
  b6c:	00100713          	li	a4,1
  b70:	0ff97913          	andi	s2,s2,255
  b74:	0ff4f493          	andi	s1,s1,255
  b78:	00078993          	mv	s3,a5
- b7c:	10d74463          	blt	a4,a3,c84 <main+0x184>
+ b7c:	10d74863          	blt	a4,a3,c8c <main+0x18c>
  b80:	00001737          	lui	a4,0x1
- b84:	01870713          	addi	a4,a4,24 # 1018 <nxt.0+0x374>
+ b84:	01c70713          	addi	a4,a4,28 # 101c <nxt.0+0x370>
  b88:	01000613          	li	a2,16
  b8c:	01000593          	li	a1,16
  b90:	3e800513          	li	a0,1000
@@ -844,20 +844,20 @@ Disassembly of section .text.startup:
  b98:	b2dff0ef          	jal	ra,6c4 <mac>
  b9c:	4e800793          	li	a5,1256
  ba0:	00c12703          	lw	a4,12(sp)
- ba4:	0ef50663          	beq	a0,a5,c90 <main+0x190>
+ ba4:	0ef50a63          	beq	a0,a5,c98 <main+0x198>
  ba8:	000017b7          	lui	a5,0x1
- bac:	01878793          	addi	a5,a5,24 # 1018 <nxt.0+0x374>
+ bac:	01c78793          	addi	a5,a5,28 # 101c <nxt.0+0x370>
  bb0:	000016b7          	lui	a3,0x1
  bb4:	00001537          	lui	a0,0x1
- bb8:	e6868693          	addi	a3,a3,-408 # e68 <nxt.0+0x1c4>
+ bb8:	e7068693          	addi	a3,a3,-400 # e70 <nxt.0+0x1c4>
  bbc:	00048613          	mv	a2,s1
  bc0:	00090593          	mv	a1,s2
- bc4:	e7050513          	addi	a0,a0,-400 # e70 <nxt.0+0x1cc>
+ bc4:	e7850513          	addi	a0,a0,-392 # e78 <nxt.0+0x1cc>
  bc8:	831ff0ef          	jal	ra,3f8 <printf>
- bcc:	ca09a023          	sw	zero,-864(s3)
+ bcc:	ca09a423          	sw	zero,-856(s3)
  bd0:	00645583          	lhu	a1,6(s0) # 80000006 <io+0x6>
  bd4:	00001537          	lui	a0,0x1
- bd8:	e9850513          	addi	a0,a0,-360 # e98 <nxt.0+0x1f4>
+ bd8:	ea050513          	addi	a0,a0,-352 # ea0 <nxt.0+0x1f4>
  bdc:	01059593          	slli	a1,a1,0x10
  be0:	0105d593          	srli	a1,a1,0x10
  be4:	815ff0ef          	jal	ra,3f8 <printf>
@@ -866,14 +866,14 @@ Disassembly of section .text.startup:
  bf0:	00c42903          	lw	s2,12(s0)
  bf4:	00c42603          	lw	a2,12(s0)
  bf8:	000f45b7          	lui	a1,0xf4
- bfc:	24058593          	addi	a1,a1,576 # f4240 <nxt.0+0xf359c>
+ bfc:	24058593          	addi	a1,a1,576 # f4240 <nxt.0+0xf3594>
  c00:	0ff57513          	andi	a0,a0,255
  c04:	00c12623          	sw	a2,12(sp)
  c08:	af9ff0ef          	jal	ra,700 <__mulsi3>
  c0c:	0ff4f493          	andi	s1,s1,255
  c10:	000025b7          	lui	a1,0x2
  c14:	00050413          	mv	s0,a0
- c18:	71058593          	addi	a1,a1,1808 # 2710 <nxt.0+0x1a6c>
+ c18:	71058593          	addi	a1,a1,1808 # 2710 <nxt.0+0x1a64>
  c1c:	00048513          	mv	a0,s1
  c20:	ae1ff0ef          	jal	ra,700 <__mulsi3>
  c24:	00190593          	addi	a1,s2,1
@@ -882,27 +882,29 @@ Disassembly of section .text.startup:
  c30:	00c12603          	lw	a2,12(sp)
  c34:	00050593          	mv	a1,a0
  c38:	00001537          	lui	a0,0x1
- c3c:	eb450513          	addi	a0,a0,-332 # eb4 <nxt.0+0x210>
+ c3c:	ebc50513          	addi	a0,a0,-324 # ebc <nxt.0+0x210>
  c40:	fb8ff0ef          	jal	ra,3f8 <printf>
  c44:	00a00513          	li	a0,10
  c48:	d44ff0ef          	jal	ra,18c <putchar>
  c4c:	00001537          	lui	a0,0x1
- c50:	ee050513          	addi	a0,a0,-288 # ee0 <nxt.0+0x23c>
+ c50:	ee850513          	addi	a0,a0,-280 # ee8 <nxt.0+0x23c>
  c54:	e80ff0ef          	jal	ra,2d4 <puts>
  c58:	00a00513          	li	a0,10
  c5c:	bedff0ef          	jal	ra,848 <usleep>
- c60:	c51ff06f          	j	8b0 <start>
- c64:	02c12083          	lw	ra,44(sp)
- c68:	02812403          	lw	s0,40(sp)
- c6c:	02412483          	lw	s1,36(sp)
- c70:	02012903          	lw	s2,32(sp)
- c74:	01c12983          	lw	s3,28(sp)
- c78:	00000513          	li	a0,0
- c7c:	03010113          	addi	sp,sp,48
- c80:	00008067          	ret
- c84:	00001737          	lui	a4,0x1
- c88:	e0870713          	addi	a4,a4,-504 # e08 <nxt.0+0x164>
- c8c:	efdff06f          	j	b88 <main+0x88>
- c90:	000017b7          	lui	a5,0x1
- c94:	e0c78793          	addi	a5,a5,-500 # e0c <nxt.0+0x168>
- c98:	f19ff06f          	j	bb0 <main+0xb0>
+ c60:	03f00513          	li	a0,63
+ c64:	d28ff0ef          	jal	ra,18c <putchar>
+ c68:	c49ff06f          	j	8b0 <start>
+ c6c:	02c12083          	lw	ra,44(sp)
+ c70:	02812403          	lw	s0,40(sp)
+ c74:	02412483          	lw	s1,36(sp)
+ c78:	02012903          	lw	s2,32(sp)
+ c7c:	01c12983          	lw	s3,28(sp)
+ c80:	00000513          	li	a0,0
+ c84:	03010113          	addi	sp,sp,48
+ c88:	00008067          	ret
+ c8c:	00001737          	lui	a4,0x1
+ c90:	e1070713          	addi	a4,a4,-496 # e10 <nxt.0+0x164>
+ c94:	ef5ff06f          	j	b88 <main+0x88>
+ c98:	000017b7          	lui	a5,0x1
+ c9c:	e1478793          	addi	a5,a5,-492 # e14 <nxt.0+0x168>
+ ca0:	f11ff06f          	j	bb0 <main+0xb0>

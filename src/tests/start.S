@@ -8,7 +8,7 @@
 	.section .text
 	.global start
 
-
+	/*char: .string "Hello"*/
 
 reset_vec:
 	j start
@@ -18,6 +18,22 @@ reset_vec:
 
 start:
 	/* zero-initialize all registers */
+
+
+	
+
+	/*la s1,char*/
+	/*lbu a0,0(s1)*/
+
+
+	/*la s1, hellochar
+
+	loop: 
+		lbu a0,4(s1)
+		call putchar*/
+		
+
+
 
 
 	/*li a0,63
@@ -131,7 +147,7 @@ start:
 	addi tp, gp, 0
 
 	/* print "DONE\n" */
-	lui a0,0x10000000>>12
+	/*lui a0,0x10000000>>12
 	addi a1,zero,'D'
 	addi a2,zero,'O'
 	addi a3,zero,'N'
@@ -141,7 +157,11 @@ start:
 	sw a2,0(a0)
 	sw a3,0(a0)
 	sw a4,0(a0)
-	sw a5,0(a0)
+	sw a5,0(a0)*/
+
+	call success
+
+
 
 	li a0, 0x20000000
 	li a1, 123456789

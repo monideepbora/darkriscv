@@ -89,7 +89,7 @@ OCFLAGS = -O binary # --reverse-bytes=4 # workaround for darkriscv big-endian bl
 ODFLAGS = -d
 
 PROJ = darksocv
-OBJS = boot.o stdio.o tests/start.o main.o io.o banner.o tests/RV32I/lui.o #$(addsuffix .o,$(basename $(wildcard tests/$(ARCHI)/*.S)))
+OBJS = boot.o stdio.o main.o io.o banner.o tests/start.o  tests/RV32I/lui.o #$(addsuffix .o,$(basename $(wildcard tests/$(ARCHI)/*.S)))
 ASMS = boot.s stdio.s main.s io.s banner.s #tests/start.S #$(basename $(wildcard tests/$(ARCHI)/*.S))
 SRCS = boot.c stdio.c main.c io.c banner.c
 

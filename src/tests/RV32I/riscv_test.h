@@ -17,8 +17,9 @@
 TEST_FUNC_NAME:				\
 	lui	a0,%hi(.test_name);	\
 	addi	a0,a0,%lo(.test_name);	\
-	lui	a2,0x10000000>>12;	\
-.prname_next:				\
+loop:	\
+	call putstr; \
+	.prname_next:				\
 	lb	a1,0(a0);		\
 	beq	a1,zero,.prname_done;	\
 	sw	a1,0(a2);		\
@@ -34,7 +35,8 @@ TEST_FUNC_NAME:				\
 	sw	a1,0(a2);
 
 #define RVTEST_PASS			\
-	call success; \
+	call OK; \
+	call putchar; \
 	lui	a0,0x10000000>>12;	\
 	addi	a1,zero,'O';		\
 	addi	a2,zero,'K';		\

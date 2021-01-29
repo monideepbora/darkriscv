@@ -46,7 +46,7 @@ void boot(void)
     {    
         while(1)
         {
-            banner();
+            //banner();
 
             printf("boot0: text@%d data@%d stack@%d\n",
                 (unsigned int)boot,

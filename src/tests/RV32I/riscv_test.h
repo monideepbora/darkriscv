@@ -37,22 +37,10 @@ loop:	\
 #define RVTEST_PASS			\
 	lui sp,(39312)>>12; \
 	call OK; \
-	nop; \
 	jal	zero,TEST_FUNC_RET;
 
 #define RVTEST_FAIL			\
 	call failure; \
-	lui	a0,0x10000000>>12;	\
-	addi	a1,zero,'E';		\
-	addi	a2,zero,'R';		\
-	addi	a3,zero,'O';		\
-	addi	a4,zero,'\n';		\
-	sw	a1,0(a0);		\
-	sw	a2,0(a0);		\
-	sw	a2,0(a0);		\
-	sw	a3,0(a0);		\
-	sw	a2,0(a0);		\
-	sw	a4,0(a0);		\
 	ebreak;
 
 #define RVTEST_CODE_END

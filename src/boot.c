@@ -48,10 +48,10 @@ void boot(void)
         {
             banner();
 
-            printf("boot0: text@%d data@%d stack@%d\n",
-                (unsigned int)boot,
-                (unsigned int)&utimers,
-                (unsigned int)&tmp+16);
+            // printf("boot0: text@%d data@%d stack@%d\n",
+            //     (unsigned int)boot,
+            //     (unsigned int)&utimers,
+            //     (unsigned int)&tmp+16);
         
             main();
         }

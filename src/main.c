@@ -33,29 +33,20 @@
 
 int main(void)
 {
-    printf("board: %s (id=%d)\n",board_name(io.board_id),io.board_id);
-    printf("build: darkriscv fw build %s\n",BUILD);
-
-    printf("core0: darkriscv@%d.%dMHz with %s%s%s\n",
-        io.board_cm,                        // board clock MHz
-        io.board_ck,                        // board clock kHz
-        ARCH,                               // architecture
-        threads>1?"+MT":"",                 //  MT support
-        mac(1000,16,16)==1256?"+MAC":"");   // MAC support
+    printf("Firmware build version %s\n",BUILD);
 
     threads = 0; // prepare for the next restart
 
-    printf("uart0: 115200 bps (div=%d)\n",io.uart.baud);
-    printf("timr0: periodic timer=%dHz (io.timer=%d)\n",(io.board_cm*1000000u+io.board_ck*10000u)/(io.timer+1),io.timer);
     printf("\n");
-
     printf("Welcome to DarkRISCV!\n");
-
-    usleep(10);
-
-     __asm__ volatile("j start;");
+    printf("\n");
+    printf("Starting tests for %s\n",ARCH);
+    printf("\n");
+    
+     __asm__ volatile("j start;"); //jump to risc-tests
 }
 
+//console functions to output tests status
 void success()
 {
     putstr("All tests passed \n$");

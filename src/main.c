@@ -49,12 +49,13 @@ int main(void)
 //console functions to output tests status
 void success()
 {
+    putchar('\n');
     putstr("All tests passed \n$");
 }
 
 void failure()
 {
-    putstr("Failure $"); 
+    putstr("..Failure \n$"); 
 }
 
 void OK()

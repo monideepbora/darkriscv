@@ -1,0 +1,438 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+io                  0x10              io.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+IO               0x0000000080000000 0x0000000000000100 rw !x
+MEM              0x0000000000000000 0x0000000000011990 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.io             0x0000000080000000       0x10
+ io.o(COMMON)
+ COMMON         0x0000000080000000       0x10 io.o
+                0x0000000080000000                io
+
+.text           0x0000000000000000     0x81a8
+ boot.o(.text)
+ .text          0x0000000000000000       0x74 boot.o
+                0x0000000000000000                boot
+ io.o(.text)
+ .text          0x0000000000000074       0xd0 io.o
+                0x0000000000000074                board_name
+ stdio.o(.text)
+ .text          0x0000000000000144      0x740 stdio.o
+                0x0000000000000144                getchar
+                0x0000000000000164                putchar
+                0x00000000000001a4                gets
+                0x000000000000026c                putstr
+                0x00000000000002ac                puts
+                0x00000000000002c8                putdx
+                0x00000000000003c0                putx
+                0x00000000000003c8                putd
+                0x00000000000003d0                printf
+                0x00000000000004cc                strncmp
+                0x0000000000000500                strcmp
+                0x0000000000000508                strlen
+                0x0000000000000528                memcpy
+                0x000000000000054c                memset
+                0x0000000000000568                strtok
+                0x0000000000000608                atoi
+                0x000000000000065c                xtoi
+                0x000000000000069c                mac
+                0x00000000000006a4                __umulsi3
+                0x00000000000006d8                __mulsi3
+                0x0000000000000728                __udiv_umod_si3
+                0x000000000000077c                __udivsi3
+                0x0000000000000784                __umodsi3
+                0x000000000000078c                __div_mod_si3
+                0x0000000000000810                __divsi3
+                0x0000000000000818                __modsi3
+                0x0000000000000820                usleep
+ banner.o(.text)
+ .text          0x0000000000000884       0x70 banner.o
+                0x0000000000000884                banner
+ main.o(.text)
+ .text          0x00000000000008f4       0x3c main.o
+                0x00000000000008f4                success
+                0x0000000000000918                failure
+                0x0000000000000924                OK
+ tests/start.o(.text)
+ .text          0x0000000000000930      0x1bc tests/start.o
+                0x0000000000000934                start
+                0x00000000000009b8                lui_ret
+                0x00000000000009c0                auipc_ret
+                0x00000000000009c8                j_ret
+                0x00000000000009d0                jal_ret
+                0x00000000000009d8                jalr_ret
+                0x00000000000009e0                beq_ret
+                0x00000000000009e8                bne_ret
+                0x00000000000009f0                blt_ret
+                0x00000000000009f8                bge_ret
+                0x0000000000000a00                bltu_ret
+                0x0000000000000a08                bgeu_ret
+                0x0000000000000a10                lb_ret
+                0x0000000000000a18                lh_ret
+                0x0000000000000a20                lw_ret
+                0x0000000000000a28                lbu_ret
+                0x0000000000000a30                lhu_ret
+                0x0000000000000a38                sb_ret
+                0x0000000000000a40                sh_ret
+                0x0000000000000a48                sw_ret
+                0x0000000000000a50                addi_ret
+                0x0000000000000a58                slti_ret
+                0x0000000000000a60                xori_ret
+                0x0000000000000a68                ori_ret
+                0x0000000000000a70                andi_ret
+                0x0000000000000a78                slli_ret
+                0x0000000000000a80                srli_ret
+                0x0000000000000a88                srai_ret
+                0x0000000000000a90                add_ret
+                0x0000000000000a98                sub_ret
+                0x0000000000000aa0                sll_ret
+                0x0000000000000aa8                slt_ret
+                0x0000000000000ab0                xor_ret
+                0x0000000000000ab8                srl_ret
+                0x0000000000000ac0                sra_ret
+                0x0000000000000ac8                or_ret
+                0x0000000000000ad0                and_ret
+                0x0000000000000ad8                simple_ret
+ *(.text)
+ .text          0x0000000000000aec      0x508 tests/RV32I/or.o
+                0x0000000000000aec                or
+ .text          0x0000000000000ff4      0x504 tests/RV32I/xor.o
+                0x0000000000000ff4                xor
+ .text          0x00000000000014f8      0x4bc tests/RV32I/sh.o
+                0x00000000000014f8                sh
+ .text          0x00000000000019b4      0x504 tests/RV32I/sub.o
+                0x00000000000019b4                sub
+ .text          0x0000000000001eb8      0x5b0 tests/RV32I/sll.o
+                0x0000000000001eb8                sll
+ .text          0x0000000000002468      0x290 tests/RV32I/lb.o
+                0x0000000000002468                lb
+ .text          0x00000000000026f8      0x2b0 tests/RV32I/lh.o
+                0x00000000000026f8                lh
+ .text          0x00000000000029a8      0x300 tests/RV32I/srai.o
+                0x00000000000029a8                srai
+ .text          0x0000000000002ca8      0x33c tests/RV32I/bltu.o
+                0x0000000000002ca8                bltu
+ .text          0x0000000000002fe4      0x2bc tests/RV32I/slti.o
+                0x0000000000002fe4                slti
+ .text          0x00000000000032a0      0x2cc tests/RV32I/slli.o
+                0x00000000000032a0                slli
+ .text          0x000000000000356c      0x2fc tests/RV32I/srli.o
+                0x000000000000356c                srli
+ .text          0x0000000000003868      0x4c8 tests/RV32I/sw.o
+                0x0000000000003868                sw
+ .text          0x0000000000003d30      0x2d0 tests/RV32I/lw.o
+                0x0000000000003d30                lw
+ .text          0x0000000000004000      0x304 tests/RV32I/beq.o
+                0x0000000000004000                beq
+ *fill*         0x0000000000004304        0x4 
+ .text          0x0000000000004308       0x90 tests/RV32I/auipc.o
+                0x0000000000004308                auipc
+ .text          0x0000000000004398      0x2d0 tests/RV32I/addi.o
+                0x0000000000004398                addi
+ .text          0x0000000000004668      0x148 tests/RV32I/jalr.o
+                0x0000000000004668                jalr
+ .text          0x00000000000047b0      0x308 tests/RV32I/bne.o
+                0x00000000000047b0                bne
+ .text          0x0000000000004ab8      0x22c tests/RV32I/xori.o
+                0x0000000000004ab8                xori
+ .text          0x0000000000004ce4      0x39c tests/RV32I/bgeu.o
+                0x0000000000004ce4                bgeu
+ .text          0x0000000000005080      0x600 tests/RV32I/srl.o
+                0x0000000000005080                srl
+ .text          0x0000000000005680      0x50c tests/RV32I/slt.o
+                0x0000000000005680                slt
+ .text          0x0000000000005b8c      0x290 tests/RV32I/lbu.o
+                0x0000000000005b8c                lbu
+ .text          0x0000000000005e1c      0x2c4 tests/RV32I/lhu.o
+                0x0000000000005e1c                lhu
+ .text          0x00000000000060e0       0xa4 tests/RV32I/lui.o
+                0x00000000000060e0                lui
+ .text          0x0000000000006184       0x40 tests/RV32I/simple.o
+                0x0000000000006184                simple
+ .text          0x00000000000061c4      0x5e0 tests/RV32I/sra.o
+                0x00000000000061c4                sra
+ .text          0x00000000000067a4      0x4fc tests/RV32I/and.o
+                0x00000000000067a4                and
+ .text          0x0000000000006ca0      0x220 tests/RV32I/ori.o
+                0x0000000000006ca0                ori
+ .text          0x0000000000006ec0       0x9c tests/RV32I/jal.o
+                0x0000000000006ec0                jal
+ .text          0x0000000000006f5c      0x524 tests/RV32I/add.o
+                0x0000000000006f5c                add
+ .text          0x0000000000007480      0x438 tests/RV32I/sb.o
+                0x0000000000007480                sb
+ .text          0x00000000000078b8      0x208 tests/RV32I/andi.o
+                0x00000000000078b8                andi
+ .text          0x0000000000007ac0       0x80 tests/RV32I/j.o
+                0x0000000000007ac0                j
+ .text          0x0000000000007b40      0x364 tests/RV32I/bge.o
+                0x0000000000007b40                bge
+ .text          0x0000000000007ea4      0x304 tests/RV32I/blt.o
+                0x0000000000007ea4                blt
+
+.text.startup   0x00000000000081a8       0x70
+ .text.startup  0x00000000000081a8       0x70 main.o
+                0x00000000000081a8                main
+
+.data           0x0000000000008218      0x368
+ *(.sbss)
+ .sbss          0x0000000000008218        0x8 io.o
+                0x0000000000008218                utimers
+                0x000000000000821c                threads
+ .sbss          0x0000000000008220        0x4 stdio.o
+ *(.rodata*)
+ .rodata.str1.4
+                0x0000000000008224       0xe0 io.o
+ .rodata.str1.4
+                0x0000000000008304       0x19 stdio.o
+ *fill*         0x000000000000831d        0x3 
+ .rodata        0x0000000000008320       0x40 stdio.o
+ .rodata.str1.4
+                0x0000000000008360      0x10d banner.o
+ *fill*         0x000000000000846d        0x3 
+ .rodata.str1.4
+                0x0000000000008470       0x9e main.o
+ *(.data)
+ .data          0x000000000000850e        0x0 io.o
+ .data          0x000000000000850e        0x0 boot.o
+ .data          0x000000000000850e        0x0 stdio.o
+ .data          0x000000000000850e        0x0 banner.o
+ .data          0x000000000000850e        0x0 main.o
+ .data          0x000000000000850e        0x0 tests/start.o
+ *fill*         0x000000000000850e        0x2 
+ .data          0x0000000000008510        0x0 tests/RV32I/or.o
+ .data          0x0000000000008510        0x0 tests/RV32I/xor.o
+ .data          0x0000000000008510       0x14 tests/RV32I/sh.o
+ .data          0x0000000000008524        0x0 tests/RV32I/sub.o
+ .data          0x0000000000008524        0x0 tests/RV32I/sll.o
+ .data          0x0000000000008524        0x4 tests/RV32I/lb.o
+ .data          0x0000000000008528        0x8 tests/RV32I/lh.o
+ .data          0x0000000000008530        0x0 tests/RV32I/srai.o
+ .data          0x0000000000008530        0x0 tests/RV32I/bltu.o
+ .data          0x0000000000008530        0x0 tests/RV32I/slti.o
+ .data          0x0000000000008530        0x0 tests/RV32I/slli.o
+ .data          0x0000000000008530        0x0 tests/RV32I/srli.o
+ .data          0x0000000000008530       0x28 tests/RV32I/sw.o
+ .data          0x0000000000008558       0x10 tests/RV32I/lw.o
+ .data          0x0000000000008568        0x0 tests/RV32I/beq.o
+ .data          0x0000000000008568        0x0 tests/RV32I/auipc.o
+ .data          0x0000000000008568        0x0 tests/RV32I/addi.o
+ .data          0x0000000000008568        0x0 tests/RV32I/jalr.o
+ .data          0x0000000000008568        0x0 tests/RV32I/bne.o
+ .data          0x0000000000008568        0x0 tests/RV32I/xori.o
+ .data          0x0000000000008568        0x0 tests/RV32I/bgeu.o
+ .data          0x0000000000008568        0x0 tests/RV32I/srl.o
+ .data          0x0000000000008568        0x0 tests/RV32I/slt.o
+ .data          0x0000000000008568        0x4 tests/RV32I/lbu.o
+ .data          0x000000000000856c        0x8 tests/RV32I/lhu.o
+ .data          0x0000000000008574        0x0 tests/RV32I/lui.o
+ .data          0x0000000000008574        0x0 tests/RV32I/simple.o
+ .data          0x0000000000008574        0x0 tests/RV32I/sra.o
+ .data          0x0000000000008574        0x0 tests/RV32I/and.o
+ .data          0x0000000000008574        0x0 tests/RV32I/ori.o
+ .data          0x0000000000008574        0x0 tests/RV32I/jal.o
+ .data          0x0000000000008574        0x0 tests/RV32I/add.o
+ .data          0x0000000000008574        0xa tests/RV32I/sb.o
+ *fill*         0x000000000000857e        0x2 
+ .data          0x0000000000008580        0x0 tests/RV32I/andi.o
+ .data          0x0000000000008580        0x0 tests/RV32I/j.o
+ .data          0x0000000000008580        0x0 tests/RV32I/bge.o
+ .data          0x0000000000008580        0x0 tests/RV32I/blt.o
+ *(.bss)
+ .bss           0x0000000000008580        0x0 io.o
+ .bss           0x0000000000008580        0x0 boot.o
+ .bss           0x0000000000008580        0x0 stdio.o
+ .bss           0x0000000000008580        0x0 banner.o
+ .bss           0x0000000000008580        0x0 main.o
+ .bss           0x0000000000008580        0x0 tests/start.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/or.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/xor.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/sh.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/sub.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/sll.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/lb.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/lh.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/srai.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/bltu.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/slti.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/slli.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/srli.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/sw.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/lw.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/beq.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/auipc.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/addi.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/jalr.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/bne.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/xori.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/bgeu.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/srl.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/slt.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/lbu.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/lhu.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/lui.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/simple.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/sra.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/and.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/ori.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/jal.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/add.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/sb.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/andi.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/j.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/bge.o
+ .bss           0x0000000000008580        0x0 tests/RV32I/blt.o
+ *(.rela*)
+ .rela.text     0x0000000000008580        0x0 io.o
+ *(COMMON)
+LOAD boot.o
+LOAD stdio.o
+LOAD main.o
+LOAD io.o
+LOAD banner.o
+LOAD tests/start.o
+LOAD tests/RV32I/or.o
+LOAD tests/RV32I/xor.o
+LOAD tests/RV32I/sh.o
+LOAD tests/RV32I/sub.o
+LOAD tests/RV32I/sll.o
+LOAD tests/RV32I/lb.o
+LOAD tests/RV32I/lh.o
+LOAD tests/RV32I/srai.o
+LOAD tests/RV32I/bltu.o
+LOAD tests/RV32I/slti.o
+LOAD tests/RV32I/slli.o
+LOAD tests/RV32I/srli.o
+LOAD tests/RV32I/sw.o
+LOAD tests/RV32I/lw.o
+LOAD tests/RV32I/beq.o
+LOAD tests/RV32I/auipc.o
+LOAD tests/RV32I/addi.o
+LOAD tests/RV32I/jalr.o
+LOAD tests/RV32I/bne.o
+LOAD tests/RV32I/xori.o
+LOAD tests/RV32I/bgeu.o
+LOAD tests/RV32I/srl.o
+LOAD tests/RV32I/slt.o
+LOAD tests/RV32I/lbu.o
+LOAD tests/RV32I/lhu.o
+LOAD tests/RV32I/lui.o
+LOAD tests/RV32I/simple.o
+LOAD tests/RV32I/sra.o
+LOAD tests/RV32I/and.o
+LOAD tests/RV32I/ori.o
+LOAD tests/RV32I/jal.o
+LOAD tests/RV32I/add.o
+LOAD tests/RV32I/sb.o
+LOAD tests/RV32I/andi.o
+LOAD tests/RV32I/j.o
+LOAD tests/RV32I/bge.o
+LOAD tests/RV32I/blt.o
+OUTPUT(darksocv.o elf32-littleriscv)
+
+.comment        0x0000000000000000       0x12
+ .comment       0x0000000000000000       0x12 io.o
+                                         0x13 (size before relaxing)
+ .comment       0x0000000000000012       0x13 boot.o
+ .comment       0x0000000000000012       0x13 stdio.o
+ .comment       0x0000000000000012       0x13 banner.o
+ .comment       0x0000000000000012       0x13 main.o
+
+.riscv.attributes
+                0x0000000000000000       0x1c
+ .riscv.attributes
+                0x0000000000000000       0x1c io.o
+ .riscv.attributes
+                0x000000000000001c       0x1c boot.o
+ .riscv.attributes
+                0x0000000000000038       0x1c stdio.o
+ .riscv.attributes
+                0x0000000000000054       0x1c banner.o
+ .riscv.attributes
+                0x0000000000000070       0x1c main.o
+ .riscv.attributes
+                0x000000000000008c       0x1a tests/start.o
+ .riscv.attributes
+                0x00000000000000a6       0x1a tests/RV32I/or.o
+ .riscv.attributes
+                0x00000000000000c0       0x1a tests/RV32I/xor.o
+ .riscv.attributes
+                0x00000000000000da       0x1a tests/RV32I/sh.o
+ .riscv.attributes
+                0x00000000000000f4       0x1a tests/RV32I/sub.o
+ .riscv.attributes
+                0x000000000000010e       0x1a tests/RV32I/sll.o
+ .riscv.attributes
+                0x0000000000000128       0x1a tests/RV32I/lb.o
+ .riscv.attributes
+                0x0000000000000142       0x1a tests/RV32I/lh.o
+ .riscv.attributes
+                0x000000000000015c       0x1a tests/RV32I/srai.o
+ .riscv.attributes
+                0x0000000000000176       0x1a tests/RV32I/bltu.o
+ .riscv.attributes
+                0x0000000000000190       0x1a tests/RV32I/slti.o
+ .riscv.attributes
+                0x00000000000001aa       0x1a tests/RV32I/slli.o
+ .riscv.attributes
+                0x00000000000001c4       0x1a tests/RV32I/srli.o
+ .riscv.attributes
+                0x00000000000001de       0x1a tests/RV32I/sw.o
+ .riscv.attributes
+                0x00000000000001f8       0x1a tests/RV32I/lw.o
+ .riscv.attributes
+                0x0000000000000212       0x1a tests/RV32I/beq.o
+ .riscv.attributes
+                0x000000000000022c       0x1a tests/RV32I/auipc.o
+ .riscv.attributes
+                0x0000000000000246       0x1a tests/RV32I/addi.o
+ .riscv.attributes
+                0x0000000000000260       0x1a tests/RV32I/jalr.o
+ .riscv.attributes
+                0x000000000000027a       0x1a tests/RV32I/bne.o
+ .riscv.attributes
+                0x0000000000000294       0x1a tests/RV32I/xori.o
+ .riscv.attributes
+                0x00000000000002ae       0x1a tests/RV32I/bgeu.o
+ .riscv.attributes
+                0x00000000000002c8       0x1a tests/RV32I/srl.o
+ .riscv.attributes
+                0x00000000000002e2       0x1a tests/RV32I/slt.o
+ .riscv.attributes
+                0x00000000000002fc       0x1a tests/RV32I/lbu.o
+ .riscv.attributes
+                0x0000000000000316       0x1a tests/RV32I/lhu.o
+ .riscv.attributes
+                0x0000000000000330       0x1a tests/RV32I/lui.o
+ .riscv.attributes
+                0x000000000000034a       0x1a tests/RV32I/simple.o
+ .riscv.attributes
+                0x0000000000000364       0x1a tests/RV32I/sra.o
+ .riscv.attributes
+                0x000000000000037e       0x1a tests/RV32I/and.o
+ .riscv.attributes
+                0x0000000000000398       0x1a tests/RV32I/ori.o
+ .riscv.attributes
+                0x00000000000003b2       0x1a tests/RV32I/jal.o
+ .riscv.attributes
+                0x00000000000003cc       0x1a tests/RV32I/add.o
+ .riscv.attributes
+                0x00000000000003e6       0x1a tests/RV32I/sb.o
+ .riscv.attributes
+                0x0000000000000400       0x1a tests/RV32I/andi.o
+ .riscv.attributes
+                0x000000000000041a       0x1a tests/RV32I/j.o
+ .riscv.attributes
+                0x0000000000000434       0x1a tests/RV32I/bge.o
+ .riscv.attributes
+                0x000000000000044e       0x1a tests/RV32I/blt.o

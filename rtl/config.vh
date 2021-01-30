@@ -46,7 +46,7 @@
 //
 // UART speed is set in bits per second, typically 115200 bps:
 
-`define __UARTSPEED__ 115200
+//`define __UARTSPEED__ 115200
 
 // darkriscv/darksocv configuration
 // 
@@ -104,7 +104,7 @@
 // minimal in typical applications with modern 5 or 6 input LUT based FPGAs, 
 // but the RV32E is better with old 4 input LUT based FPGAs.
 
-//`define __RV32E__
+`define __RV32E__
 
 // initial PC and SP
 //
@@ -161,98 +161,6 @@
 
 `ifdef __ICARUS__
     `define SIMULATION 1
-`endif
-
-`ifdef XILINX_ISIM
-    `define SIMULATION 2
-`endif
-
-`ifdef MODEL_TECH
-    `define SIMULATION 3
-`endif
-
-`ifdef XILINX_SIMULATOR
-    `define SIMULATION 4
-`endif
-
-`ifdef AVNET_MICROBOARD_LX9
-    `define BOARD_ID 1
-    //`define BOARD_CK 100000000
-    //`define BOARD_CK 66666666
-    //`define BOARD_CK 40000000
-    // example of DCM logic:
-    `define BOARD_CK_REF 100000000
-    `define BOARD_CK_MUL 2
-    `ifdef __3STAGE__
-        `define BOARD_CK_DIV 2 // 100MHz 
-    `else
-        `define BOARD_CK_DIV 4 // 50MHz
-    `endif
-`endif
-
-`ifdef XILINX_AC701_A200
-    `define BOARD_ID 2
-    //`define BOARD_CK 90000000
-    `define BOARD_CK_REF 90000000 
-    `define BOARD_CK_MUL 4
-    `define BOARD_CK_DIV 2
-`endif
-
-`ifdef QMTECH_SDRAM_LX16
-    `define BOARD_ID 3
-    `define BOARD_CK_REF 50000000
-    `define BOARD_CK_MUL 4
-    `define BOARD_CK_DIV 2
-    `define INVRES 1
-`endif
-
-`ifdef QMTECH_SPARTAN7_S15
-    `define BOARD_ID 4
-    `define BOARD_CK_REF 50000000 
-    `define BOARD_CK_MUL 20
-    `define BOARD_CK_DIV 10
-    `define XILINX7CLK 1
-    `define VIVADO 1 
-    `define INVRES 1
-`endif
-
-`ifdef LATTICE_BREVIA2_XP2
-    `define BOARD_ID 5
-    `define BOARD_CK 50000000
-    `define INVRES 1
-`endif
-
-`ifdef PISWORDS_RS485_LX9
-    `define BOARD_ID 6
-    `define BOARD_CK_REF 50000000
-    `define BOARD_CK_MUL 4
-    `define BOARD_CK_DIV 2
-    `define INVRES 1
-`endif
-
-`ifdef DIGILENT_SPARTAN3_S200
-    `define BOARD_ID 7
-    `define BOARD_CK 50000000
-`endif
-
-`ifdef ALIEXPRESS_HPC40GBE_K420
-    `define BOARD_ID 8
-    //`define BOARD_CK 200000000
-    `define BOARD_CK_REF 100000000
-    `define BOARD_CK_MUL 11
-    `define BOARD_CK_DIV 5
-    `define XILINX7CLK 1
-    `define INVRES 1    
-`endif
-
-`ifdef QMTECH_ARTIX7_A35
-    `define BOARD_ID 9
-    `define BOARD_CK_REF 50000000 
-    `define BOARD_CK_MUL 20
-    `define BOARD_CK_DIV 10
-    `define XILINX7CLK 1
-    `define VIVADO 1 
-    `define INVRES 1
 `endif
 
 `ifndef BOARD_ID

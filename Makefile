@@ -1,59 +1,51 @@
-RISCV_GNU_TOOLCHAIN_INSTALL_PREFIX = /opt/riscv32
-
-TOOLCHAIN_PREFIX = $(RISCV_GNU_TOOLCHAIN_INSTALL_PREFIX)/bin/riscv32-unknown-elf-
-
-IVERILOG = iverilog
-VVP = vvp
-GTKWAVE = gtkwave
-YOSYS = yosys
+#
+# Copyright (c) 2018, Marcelo Samsoniuk
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# 
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# 
+# * Neither the name of the copyright holder nor the names of its
+#   contributors may be used to endorse or promote products derived from
+#   this software without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+#
+# ===8<--------------------------------------------------------- cut here!
+#
+# This the root makefile and the function of this file is call other
+# makefiles. Of course, you need first set the GCC compiler path/name, the
+# simulator path/name and the board model:
+#
 
 ifndef ARCH
 ARCH = RV32I
 endif
 
-# default test vars for RV32I
-ifeq ($(ARCH),RV32I)
-TEST_OBJS_DEFAULT = $(addsuffix .o,$(basename $(wildcard tests/$(ARCH)/*.S)))
-TEST_DIR_TARGET = tests/$(ARCH)/
-GCC_FLAGS = -UMUL
-INTEGER_INST = 1
-POST_SYNTH_NETLIST = picorv32-post-synth-rv32i
-MABI = ilp32
-MARCH = rv32i
-endif
 
-# define firmware file to link test object files
-# same firmware file used to
-FIRMWARE_OBJS = tests/start.o
+default: test_rtl
 
-all: tests/firmware.hex
-
-testbench/testbench_rtl.vvp: testbench/testbench.v source/picorv32.v source/picorv32_peripherals.v source/picorv32_wrapper.v source/axi4_memory.v
-	$(IVERILOG) -o $@ $(subst 1,-DCOMPRESSED_ISA,$(COMPRESSED_ISA)) $^
-	chmod -x $@
-
-
-tests/firmware.hex: tests/firmware.bin
-	hexdump -ve '1/4 "%08x\n"' $< > $@
-
-tests/firmware.bin: tests/firmware.elf
-	$(TOOLCHAIN_PREFIX)objcopy -O binary $< $@
-	chmod -x $@
-
-tests/firmware.elf: $(FIRMWARE_OBJS) $(TEST_OBJS_DEFAULT) tests/sections.lds
-	$(TOOLCHAIN_PREFIX)gcc -march=${MARCH} -mabi=${MABI} -Os -ffreestanding -nostdlib -o $@ \
-		-Wl,-Bstatic,--strip-debug \
-		$(FIRMWARE_OBJS) $(TEST_OBJS_DEFAULT) -lgcc
-	chmod -x $@
-
-tests/start.o: tests/start.S
-	$(TOOLCHAIN_PREFIX)gcc -c -march=${MARCH} -mabi=${MABI} -o $@ $(GCC_FLAGS) $<
-
-$(addsuffix %.o,$(basename $(TEST_DIR_TARGET))): $(addsuffix %.S,$(basename $(TEST_DIR_TARGET))) tests/$(ARCH)/riscv_test.h tests/$(ARCH)/test_macros.h
-	$(TOOLCHAIN_PREFIX)gcc -c -march=${MARCH} -mabi=${MABI} -o $@ -DTEST_FUNC_NAME=$(notdir $(basename $<)) \
-		-DTEST_FUNC_TXT='"$(notdir $(basename $<))"' -DTEST_FUNC_RET=$(notdir $(basename $<))_ret $<
-
+test_rtl:
+	make -C src all  ARCH=$(ARCH)           
+	make -C sim test_rtl             
+	
 clean:
-	rm -vrf $(FIRMWARE_OBJS) tests/RV32I/*.o tests/RV32IM/*.o tests/RV32IC/*.o tests/RV32IMC/*.o tests/RV32E/*.o  \
-		tests/firmware.elf tests/firmware.bin tests/firmware.hex tests/firmware.map \
-		testbench/testbench_gate.vvp testbench/testbench_rtl.vvp wave.vcd
+	make -C src clean
+	make -C sim clean
+	

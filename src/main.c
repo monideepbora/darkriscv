@@ -49,30 +49,21 @@ int main(void)
     printf("timr0: periodic timer=%dHz (io.timer=%d)\n",(io.board_cm*1000000u+io.board_ck*10000u)/(io.timer+1),io.timer);
     printf("\n");
 
-    printf("Welcome to DarkertergRISCV!\n");
+    printf("Welcome to DarkRISCV!\n");
 
     usleep(10);
 
      __asm__ volatile("j start;");
-
-    //  __asm__ volatile("li a0,63; \
-	// call putchar; ");
 }
 
 void success()
 {
-
-    putstr("Success >");
-    // putchar('M');
-    // putchar('O');
-  
+    putstr("All tests passed \n$");
 }
 
 void failure()
 {
-    putstr("Failure >");
-    // putchar('M');
-    // putchar('O');  
+    putstr("Failure $"); 
 }
 
 void OK()

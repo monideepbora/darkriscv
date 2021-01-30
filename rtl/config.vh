@@ -146,7 +146,7 @@
 // the DLEN operand size in the data bus width available.
 
 `define __RESETPC__ 32'd0
-`define __RESETSP__ 32'd8192
+`define __RESETSP__ 32'd39318
 
 // board definition:
 // 

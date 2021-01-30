@@ -62,14 +62,14 @@ module darksocv
     
     // ro/rw memories
 
-    reg [31:0] MEM [0:128*1024/4-1]; // ro memory
+    reg [31:0] MEM [0:72080-1]; // ro memory
 
     // memory initialization
 
     integer i;
     initial
     begin
-        for(i=0;i!=128*1024/4-1;i=i+1)
+        for(i=0;i!=72080-1;i=i+1)
         begin
             MEM[i] = 32'd0;
         end
@@ -142,7 +142,7 @@ module darksocv
     always@(posedge CLK) // stage #0.5    
     begin
 
-        ROMFF <= MEM[IADDR[12:2]];
+        ROMFF <= MEM[IADDR[30:2]];
 
     end
 
@@ -186,7 +186,7 @@ module darksocv
     
     always@(posedge CLK) // stage #1.5
     begin
-        RAMFF <= MEM[DADDR[12:2]];
+        RAMFF <= MEM[DADDR[30:2]];
     end
 
     //assign DATAI = DADDR[31] ? IOMUX  : RAM[DADDR[11:2]];
@@ -205,7 +205,7 @@ module darksocv
         if(!HLT&&WR&&DADDR[31]==0/*&&DADDR[12]==1*/)
         begin
     
-            MEM[DADDR[12:2]] <=
+            MEM[DADDR[30:2]] <=
                
                                 {
                                     BE[3] ? DATAO[3 * 8 + 7: 3 * 8] : RAMFF[3 * 8 + 7: 3 * 8],
@@ -217,10 +217,10 @@ module darksocv
 
 `else
    
-        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[3]) MEM[DADDR[12:2]][3 * 8 + 7: 3 * 8] <= DATAO[3 * 8 + 7: 3 * 8];
-        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[2]) MEM[DADDR[12:2]][2 * 8 + 7: 2 * 8] <= DATAO[2 * 8 + 7: 2 * 8];
-        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[1]) MEM[DADDR[12:2]][1 * 8 + 7: 1 * 8] <= DATAO[1 * 8 + 7: 1 * 8];
-        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[0]) MEM[DADDR[12:2]][0 * 8 + 7: 0 * 8] <= DATAO[0 * 8 + 7: 0 * 8];
+        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[3]) MEM[DADDR[30:2]][3 * 8 + 7: 3 * 8] <= DATAO[3 * 8 + 7: 3 * 8];
+        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[2]) MEM[DADDR[30:2]][2 * 8 + 7: 2 * 8] <= DATAO[2 * 8 + 7: 2 * 8];
+        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[1]) MEM[DADDR[30:2]][1 * 8 + 7: 1 * 8] <= DATAO[1 * 8 + 7: 1 * 8];
+        if(WR&&DADDR[31]==0&&/*DADDR[12]==1&&*/BE[0]) MEM[DADDR[30:2]][0 * 8 + 7: 0 * 8] <= DATAO[0 * 8 + 7: 0 * 8];
 `endif
 
         IOMUXFF <= IOMUX[DADDR[3:2]]; // read w/ 2 wait-states

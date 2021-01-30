@@ -35,14 +35,7 @@ loop:	\
 	sw	a1,0(a2);
 
 #define RVTEST_PASS			\
-	lui	a0,0x10000000>>12;	\
-	addi	a1,zero,'O';		\
-	addi	a2,zero,'K';		\
-	addi	a3,zero,'\n';		\
-	sw	a1,0(a0);		\
-	sw	a2,0(a0);		\
-	sw	a3,0(a0);		\ 
-	lui sp,(128*1024)>>12; \
+	lui sp,(39312)>>12; \
 	call OK; \
 	nop; \
 	jal	zero,TEST_FUNC_RET;

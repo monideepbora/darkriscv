@@ -1,7 +1,7 @@
 MEMORY
 {
-    IO (rw!x) : ORIGIN = 0x80000000, LENGTH = 0x10
-    MEM (rwx) : ORIGIN = 0x00000000, LENGTH = 0x9990
+    IO (rw!x) : ORIGIN = 0x80000000, LENGTH = 0x100
+    MEM (rwx) : ORIGIN = 0x00000000, LENGTH = 0x11990
 }
 
 

@@ -140,18 +140,24 @@ module darkuart
                     $write("%c",DATAI[15:8]);
                 end
 
-                 begin
+                if(DATAI[15:8]!="$")
+                begin
                 $write("%c",DATAI[7:0]);  
-            end   
+                end   
 
-                
                 
                 if(DATAI[15:8]=="#") // break point
                 begin
                     $display("[checkpoint #]");
                     $stop();
                 end
-                
+
+                if(DATAI[15:8]=="$") // break point
+                begin
+                    $display("Finished");
+                    $finish();
+                end
+
                 if(DATAI[15:8]==">") // prompt '>'
                 begin
                     $display(" no UART input, finishing simulation...");

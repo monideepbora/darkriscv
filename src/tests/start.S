@@ -8,8 +8,6 @@
 	.section .text
 	.global start
 
-	/*char: .string "Hello"*/
-
 reset_vec:
 	j start
 
@@ -18,26 +16,6 @@ reset_vec:
 
 start:
 	/* zero-initialize all registers */
-
-
-	
-
-	/*la s1,char*/
-	/*lbu a0,0(s1)*/
-
-
-	/*la s1, hellochar
-
-	loop: 
-		lbu a0,4(s1)
-		call putchar*/
-		
-
-
-
-
-	/*li a0,63
-	call putchar*/
 	addi x1, zero, 0
 	addi x2, zero, 0
 	addi x3, zero, 0
@@ -78,15 +56,17 @@ start:
 #define TEST(n) \
 	.global n; \
 	addi x1, zero, 1000; \
-	/*picorv32_timer_insn(zero, x1); \*/jal zero,n; \
+	jal zero,n; \
 	.global n ## _ret; \
 	n ## _ret:
 
 	TEST(lui)
 	TEST(auipc)
+
 	TEST(j)
 	TEST(jal)
-/*	TEST(jalr)
+	TEST(jalr)
+
 	TEST(beq)
 	TEST(bne)
 	TEST(blt)
@@ -123,51 +103,18 @@ start:
 	TEST(or)
 	TEST(and)
 
-	#ifdef MUL
-	TEST(mulh)
-	TEST(mulhsu)
-	TEST(mulhu)
-	TEST(mul)
-	TEST(div)
-	TEST(divu)
-	TEST(rem)
-	TEST(remu)
-	#endif
+	TEST(simple)
 
+	/* set stack pointer */
+	lui sp,(39312)>>12
 
-	TEST(simple) */
-
-	/* set stack pointer 
-	lui sp,(128*1024)>>12*/
-
-	/* set gp and tp 
+	 /*set gp and tp*/ 
 	lui gp, %hi(0xdeadbeef)
 	addi gp, gp, %lo(0xdeadbeef)
-	addi tp, gp, 0*/
-
-	/* print "DONE\n" */
-	/*lui a0,0x10000000>>12
-	addi a1,zero,'D'
-	addi a2,zero,'O'
-	addi a3,zero,'N'
-	addi a4,zero,'E'
-	addi a5,zero,'\n'
-	sw a1,0(a0)
-	sw a2,0(a0)
-	sw a3,0(a0)
-	sw a4,0(a0)
-	sw a5,0(a0)*/
+	addi tp, gp, 0
 
 	call success
 
-
-
-	li a0, 0x20000000
-	li a1, 123456789
-	sw a1,0(a0)
-
-	/* trap */
-	ebreak
 
 	
 

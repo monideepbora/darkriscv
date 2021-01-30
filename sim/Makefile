@@ -31,15 +31,15 @@ IVERILOG = iverilog
 VVP = vvp
 
 ifeq ($(ARCH),RV32I)
-MACROS = -DSIMULATION
+MACROS =
 endif
 
 ifeq ($(ARCH),RV32E)
-MACROS = -D__RV32E__ -DSIMULATION 
+MACROS = -D__RV32E__
 endif
 
 clean:
-	-rm darksocv.vvp darksocv.vcd
+	-rm darksocv_rtl.vvp darksocv.vcd
 
 test_rtl: darksocv_rtl.vvp ../src/darksocv.mem
 	$(VVP) -N $<

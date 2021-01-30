@@ -154,6 +154,10 @@ module darkriscv
 `ifdef __THREADING__    
 
     `ifdef __RV32E__
+
+        initial begin
+        $display("\nRV32E mode");
+        end
     
         reg [4:0] RESMODE = -1;
 
@@ -161,6 +165,9 @@ module darkriscv
         wire [4:0] S1PTR  = { XMODE, XIDATA[18:15] };
         wire [4:0] S2PTR  = { XMODE, XIDATA[23:20] };
     `else
+        initial begin
+        $display("\nRV32I mode");
+        end
         reg [5:0] RESMODE = -1;
 
         wire [5:0] DPTR   = XRES ? RESMODE : { XMODE, XIDATA[11: 7] }; // set SP_RESET when RES==1

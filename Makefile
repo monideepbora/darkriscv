@@ -34,18 +34,26 @@
 # simulator path/name and the board model:
 #
 
+# default input arguments
 ifndef ARCH
 ARCH = RV32I
 endif
+
+PIPELINE_STAGE ?= 2
+THREADING ?= 0
+WAITSTATES ?= 0
+
 
 
 default: test_rtl
 
 test_rtl:
-	make -C src all  ARCH=$(ARCH)           
+	make -C src all  ARCH=$(ARCH)   
+	make -C rtl compute_config PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES)           
 	make -C sim test_rtl ARCH=$(ARCH)             
 	
 clean:
 	make -C src clean
 	make -C sim clean
+	make -C rtl clean
 	

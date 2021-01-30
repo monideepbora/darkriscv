@@ -26,32 +26,29 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 
-ifndef ICARUS
-    ICARUS = iverilog
+
+IVERILOG = iverilog
+VVP = vvp
+
+ifeq ($(ARCH),RV32I)
+MACROS = -DSIMULATION
 endif
 
-RTLS = darksimv.v ../rtl/darksocv.v ../rtl/darkuart.v ../rtl/darkriscv.v
-INCS = ../rtl/config.vh
-XSIM = darksocv
-VCDS = darksocv.vcd
-
-ifdef HARVARD
-	SRCS = ../src/darksocv.rom.mem ../src/darksocv.ram.mem
-else
-	SRCS = ../src/darksocv.mem
+ifeq ($(ARCH),RV32E)
+MACROS = -D__RV32E__ -DSIMULATION 
 endif
-
-DEPS = $(SRCS) $(RTLS) $(INCS)
-
-all: $(VCDS)
-	@echo simulation ok.
 
 clean:
-	-rm $(VCDS) $(XSIM)
+	-rm darksocv.vvp darksocv.vcd
 
-$(VCDS): $(XSIM)
-	./$(XSIM)
+test_rtl: darksocv_rtl.vvp ../src/darksocv.mem
+	$(VVP) -N $<
+	@echo ''
+	@echo 'Tests done for ' $(ARCH)
+
+darksocv_rtl.vvp: darksimv.v ../rtl/darksocv.v ../rtl/darkuart.v ../rtl/darkriscv.v
+	$(IVERILOG) -o $@ -I../rtl $(MACROS) $^
+	chmod -x $@
 
 
-$(XSIM): $(DEPS)
-	$(ICARUS) -I ../rtl -o $(XSIM) $(RTLS)
+

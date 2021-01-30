@@ -32,14 +32,7 @@
 
 // memory architecture
 //
-// TODO: fix the different memory architecture concepts:
-// status:
-// ICACHE: works without interrupt
-// DCACHE: does not work!
-// WAITSTATE: works
-// 
-//`define __ICACHE__              // instruction cache
-//`define __DCACHE__              // data cache (bug: simulation only)
+
 //`define __WAITSTATES__          // wait-state tests, no cache
 
 // peripheral configuration
@@ -104,7 +97,9 @@
 // minimal in typical applications with modern 5 or 6 input LUT based FPGAs, 
 // but the RV32E is better with old 4 input LUT based FPGAs.
 
-`define __RV32E__
+//DONOT ENABLE THIS HERE: IT IS HANDLED BY THE MAKEFILE BY PASSING MACROS AT RUNTIME:
+//`define __RV32E__
+//DONOT ENABLE THIS HERE: IT IS HANDLED BY THE MAKEFILE BY PASSING MACROS AT RUNTIME:
 
 // initial PC and SP
 //
@@ -115,35 +110,6 @@
 // RAM memory matches with the .data and other volatile data, in a way that
 // the stack can be positioned in the top of RAM and does not match with the
 // .data.
-
-//`define __HARVARD__
-
-// full harvard architecture:
-// 
-// When defined, enforses that the instruction and data buses are connected
-// to fully separate memory banks.  Although the darkriscv always use
-// harvard architecture in the core, with separate instruction and data
-// buses, the logic levels outside the core can use different architectures
-// and concepts, including von neumann, wich a single bus shared by
-// instruction and data access, as well a mix between harvard and von
-// neumann, which is possible in the case of dual-port blockrams, where is
-// possible connect two separate buses in a single memory bank.  the main
-// advantage of a single memory bank is that the .text and .data areas can
-// be better allocated, but in this case is not possible protect the .text
-// area as in the case of separate memory banks.
-
-//`define __FLEXBUZZ__
-
-// flexbuzz interface (experimental):
-//
-// A new data bus interface similar to a well known c*ldfire bus interface, in 
-// a way that part of the bus routing is moved to the core, in a way that 
-// is possible support different bus widths (8, 16 or 32 bit) and endians more 
-// easily (the new interface is natively big-endian, but the endian can be adjusted
-// in the bus interface dinamically). Similarly to the standard 32-bit interface, 
-// the external logic must detect the RD/WR operation quick enough and assert HLT 
-// in order to insert wait-states and perform the required multiplexing to fit 
-// the DLEN operand size in the data bus width available.
 
 `define __RESETPC__ 32'd0
 `define __RESETSP__ 32'd39318
@@ -158,10 +124,6 @@
 //`define QMTECH_SDRAM_LX16
 
 // the following defines are automatically defined:
-
-`ifdef __ICARUS__
-    `define SIMULATION 1
-`endif
 
 `ifndef BOARD_ID
     `define BOARD_ID 0    

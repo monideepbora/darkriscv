@@ -51,6 +51,8 @@
 */
 // uart states
 
+`define __BAUD__ ((`BOARD_CK/`__UARTSPEED__))
+
 `define UART_STATE_IDLE  6
 `define UART_STATE_START 7
 `define UART_STATE_DATA0 8
@@ -127,8 +129,6 @@ module darkuart
             begin
                 $write("%c",DATAI[7:0]);  
             end
-
-
 
             if(BE[1])
             begin

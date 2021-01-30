@@ -75,10 +75,7 @@ module darksocv
         end
         
         // workaround for vivado: no path in simulation and .mem extension
-
-        $readmemh("../src/darksocv.mem",MEM);
-        //$readmemh("../tests/firmware.hex",MEM);
-            
+        $readmemh("../src/darksocv.mem",MEM);      
     end
     // darkriscv bus interface
 
@@ -96,13 +93,12 @@ module darksocv
     
     wire HLT;
     
-
-
-    
-
     reg [31:0] ROMFF;
 
 `ifdef __WAITSTATES__
+    initial begin
+        $display("\nWait-states enabled");
+    end
     
     reg [1:0] IHITACK = 0;
     
@@ -113,13 +109,20 @@ module darksocv
         IHITACK <= RES ? 1 : IHITACK ? IHITACK-1 : 1; // wait-states
     end    
 `else
+     initial begin
+        $display("\nWait-states disabled");
+    end
 
     wire IHIT = 1;
     
 `endif
 
 
-`ifdef __3STAGE__    
+`ifdef __3STAGE__   
+
+    initial begin
+        $display("\n3-stage pipeline enabled");
+    end
 
     reg [31:0] ROMFF2 = 0;
     reg        HLT2   = 0;
@@ -136,6 +139,9 @@ module darksocv
     
     assign IDATA = HLT2 ? ROMFF2 : ROMFF;
 `else    
+    initial begin
+        $display("\n2-stage pipeline enabled");
+    end
     assign IDATA = ROMFF;
 `endif
 

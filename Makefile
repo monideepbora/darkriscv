@@ -43,7 +43,7 @@ default: test_rtl
 
 test_rtl:
 	make -C src all  ARCH=$(ARCH)           
-	make -C sim test_rtl             
+	make -C sim test_rtl ARCH=$(ARCH)             
 	
 clean:
 	make -C src clean

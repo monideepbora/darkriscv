@@ -91,7 +91,7 @@ all: $(PROJ).mem $(DEPS)
 	echo sources ok.
 
 clean:
-	-rm *.o *.s $(PROJ).mem $(PROJ).o $(PROJ).map
+	-rm *.o *.s $(PROJ).mem $(PROJ).o $(PROJ).map $(PROJ).lst
 	-rm -r tests/RV32I/*.o tests/RV32E/*.o
 	-rm tests/start.o
 

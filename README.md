@@ -4,7 +4,7 @@ DARKRISCV is a CPU core that implements the RISC-V RV32I and RV32E Instruction S
 
 
 #### Dependencies
-1. icarus-verilog : `sudo apt install iverlog` (Building from source recommended)
+1. icarus-verilog : `sudo apt install iverilog` (Building from source recommended)
 2. gtkwave (only for debugging): `sudo apt install gtkwave`
 3. yosys: `sudo apt install yosys` 
 
@@ -57,8 +57,10 @@ PIPELINE_STAGE ?= 2 (2-stage pipeline, default)
 PIPELINE_STAGE = 3 (3-stage pipeline)
 
 THREADING = 1 (enable multi-threading, experimental)
+THREADING = 0 (enable multi-threading, default)
 
 WAITSTATES = 1 (enable waitstates)
+WAITSTATES = 0 (disable waitstates, default)
 ```
 
 #### Output

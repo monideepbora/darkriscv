@@ -5,6 +5,7 @@
 PIPELINE_STAGE=""
 THREADING=""
 WAITSTATES=""
+ARCHI=""
 
 IFS=","
 
@@ -22,6 +23,10 @@ do
         ;;
         -w=*|--waitstates=*)
         WAITSTATES="${arg#*=}"
+        shift
+        ;;
+        -a=*|--architecture=*)
+        ARCHI="${arg#*=}"
         shift
         ;;
 esac
@@ -45,6 +50,12 @@ elif [[ "$WAITSTATES" -eq "0" ]]; then
     WAITSTATES=""
 fi
 
+if [ "$ARCHI" = "RV32I" ]; then
+    ARCHI=""
+elif [ "$ARCHI" = "RV32E" ]; then
+    ARCHI="\`define __RV32E__"
+fi
+
 # echo "$PIPELINE_STAGE"
 # echo "$THREADING"
 # echo "$WAITSTATES"
@@ -55,6 +66,7 @@ cat > config.vh <<EOF
 ${PIPELINE_STAGE}
 ${THREADING}
 ${WAITSTATES}
+${ARCHI}
 
 \`define __RESETPC__ 32'd0
 \`define __RESETSP__ 32'd39318

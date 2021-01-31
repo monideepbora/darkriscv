@@ -61,7 +61,6 @@ THREADING = 1 (enable multi-threading, experimental)
 WAITSTATES = 1 (enable waitstates)
 ```
 
-
 #### Output
 
 A successful output looks like as in the image below:

@@ -66,7 +66,7 @@ WAITSTATES = 1 (enable waitstates)
 
 A successful output looks like as in the image below:
 
-![output](darkriscv/images/output.gif "output")
+![output](https://github.com/monideepbora/darkriscv/blob/develop/images/output.gif "output")
 
 #### Progress
 

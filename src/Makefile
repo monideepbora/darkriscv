@@ -41,12 +41,8 @@ ifeq ($(ARCH),RV32I)
 TEST_OBJS_DEFAULT = $(addsuffix .o,$(basename $(wildcard tests/$(ARCH)/*.S)))
 TEST_DIR_TARGET = tests/$(ARCH)/
 GCC_FLAGS = -UMUL
-INTEGER_INST = 1
-POST_SYNTH_NETLIST = 
-POST_SYNTH_NETLIST_FLAGS = -n=
 MABI = ilp32
 MARCH = rv32i
-COMPILE_PARAMS = 
 endif
 
 # default test vars for RV32E
@@ -54,12 +50,8 @@ ifeq ($(ARCH),RV32E)
 TEST_OBJS_DEFAULT = $(addsuffix .o,$(basename $(wildcard tests/$(ARCH)/*.S)))
 TEST_DIR_TARGET = tests/$(ARCH)/
 GCC_FLAGS = -UMUL -DABI_ILP32E
-EMBD_INST = 1
-POST_SYNTH_NETLIST = 
-POST_SYNTH_NETLIST_FLAGS = -n=
 MABI = ilp32e
 MARCH = rv32e
-COMPILE_PARAMS =
 endif
 
 BUILD = $(shell date -R)
@@ -83,7 +75,7 @@ ASMS = boot.s stdio.s main.s io.s banner.s
 SRCS = boot.c stdio.c main.c io.c banner.c
 
 
-DEPS = $(SRCS) $(ASMS) $(OBJS) $(PROJ).ld $(PROJ).ld.src
+DEPS = $(SRCS) $(ASMS) $(OBJS) $(PROJ).ld 
 
 .PHONY: all
 

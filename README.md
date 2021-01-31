@@ -66,7 +66,7 @@ WAITSTATES = 1 (enable waitstates)
 
 A successful output looks like as in the image below:
 
-![output](darkriscv_gate_level_riscv-tests/images/output.gif "output")
+![output](darkriscv/images/output.gif "output")
 
 #### Progress
 

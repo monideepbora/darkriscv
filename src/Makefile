@@ -80,7 +80,7 @@ DEPS = $(SRCS) $(ASMS) $(OBJS) $(PROJ).ld
 .PHONY: all
 
 all: $(PROJ).mem $(DEPS)
-	echo sources ok.
+	@echo sources ok.
 
 clean:
 	-rm *.o *.s $(PROJ).mem $(PROJ).o $(PROJ).map $(PROJ).lst
@@ -113,5 +113,5 @@ $(PROJ).mem: $(PROJ).o
 	#xxd -p -c 4 -g 4 $< > $@
 	rm $(PROJ).bin
 	wc -l $@
-	echo mem ok.
+	@echo mem ok.
 	

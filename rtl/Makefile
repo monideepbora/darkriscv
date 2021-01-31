@@ -13,12 +13,15 @@ NETLIST_FLAG = -n=
 
 compute_config: generate_config.sh	
 	bash generate_config.sh $(PIPELINE_STAGE_FLAG)$(PIPELINE_STAGE) $(THREADING_FLAG)$(THREADING) $(WAITSTATES_FLAG)$(WAITSTATES)  
+	@echo config header generate ok
 
 config.vh: generate_config.sh
 	bash generate_config.sh $(PIPELINE_STAGE_FLAG)$(PIPELINE_STAGE) $(THREADING_FLAG)$(THREADING) $(WAITSTATES_FLAG)$(WAITSTATES)  
-
+	@echo config header generate ok
+	
 synth: synth.ys
 	$(YOSYS) -s synth.ys | tee console_output.txt
+	@echo synthesis ok
 
 synth.ys: compute_synth.sh config.vh
 	bash compute_synth.sh $(ARCH_FLAG)$(ARCH) $(NETLIST_FLAG)$(NETLIST)  

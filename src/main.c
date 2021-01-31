@@ -42,7 +42,7 @@ int main(void)
     
      printf("Starting tests for %s\n",ARCH);
     
-    __asm__ volatile("j start;"); //jump to risc-tests
+    __asm__ volatile("j start;"); //jump to riscv-tests
 }
 
 //console functions to output tests status

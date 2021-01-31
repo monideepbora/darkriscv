@@ -66,6 +66,9 @@ test_gate:
 synth:
 	make -C rtl synth ARCH=$(ARCH) NETLIST=$(NETLIST) PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES)
 	
+test_debug:
+	gtkwave sim/darksocv.vcd sim/wave.gtkw
+
 clean:
 	make -C src clean
 	make -C sim clean

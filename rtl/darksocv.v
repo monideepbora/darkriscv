@@ -58,8 +58,6 @@ module darksocv
     wire CLK = XCLK;
     wire RES = IRES[7];    
 
-    
-    
     // ro/rw memories
 
     reg [31:0] MEM [0:72080-1]; // ro memory
@@ -95,9 +93,19 @@ module darksocv
     
     reg [31:0] ROMFF;
 
+`ifdef __THREADING__
+    initial begin
+        $display("\nTHREADING ENABLED");
+    end
+`else
+    initial begin
+        $display("\nTHREADING DISABLED");
+    end
+`endif
+
 `ifdef __WAITSTATES__
     initial begin
-        $display("\nWait-states enabled");
+        $display("\nWAIT-STATES ENABLED");
     end
     
     reg [1:0] IHITACK = 0;
@@ -110,7 +118,7 @@ module darksocv
     end    
 `else
      initial begin
-        $display("\nWait-states disabled");
+        $display("\nWAIT-STATES DISABLED");
     end
 
     wire IHIT = 1;
@@ -121,7 +129,7 @@ module darksocv
 `ifdef __3STAGE__   
 
     initial begin
-        $display("\n3-stage pipeline enabled");
+        $display("\n3-STAGE PIPELINE ENABLED\n");
     end
 
     reg [31:0] ROMFF2 = 0;
@@ -140,7 +148,7 @@ module darksocv
     assign IDATA = HLT2 ? ROMFF2 : ROMFF;
 `else    
     initial begin
-        $display("\n2-stage pipeline enabled");
+        $display("\n2-STAGE PIPELINE ENABLED\n");
     end
     assign IDATA = ROMFF;
 `endif

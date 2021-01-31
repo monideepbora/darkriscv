@@ -46,7 +46,9 @@ void boot(void)
     {    
         while(1)
         {
+            #if RTL
             banner();
+            #endif
 
             // printf("boot0: text@%d data@%d stack@%d\n",
             //     (unsigned int)boot,

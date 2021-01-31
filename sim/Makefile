@@ -31,24 +31,33 @@ IVERILOG = iverilog
 VVP = vvp
 
 ifeq ($(ARCH),RV32I)
-MACROS =
+MACROS = -DSIMULATION
 endif
 
 ifeq ($(ARCH),RV32E)
-MACROS = -D__RV32E__
+MACROS = -D__RV32E__ -DSIMULATION 
 endif
 
 clean:
-	-rm darksocv_rtl.vvp darksocv.vcd
+	-rm darksocv_rtl.vvp darksocv.vcd darksocv_gate.vvp
 
 test_rtl: darksocv_rtl.vvp ../src/darksocv.mem
 	$(VVP) -N $<
 	@echo ''
 	@echo 'Tests done for ' $(ARCH)
 
+test_gate: darksocv_gate.vvp ../src/darksocv.mem
+	$(VVP) -N $<
+	@echo ''
+	@echo 'Tests done for ' $(ARCH)
+
+
+
 darksocv_rtl.vvp: darksimv.v ../rtl/darksocv.v ../rtl/darkuart.v ../rtl/darkriscv.v
 	$(IVERILOG) -o $@ -I../rtl $(MACROS) $^
 	chmod -x $@
 
 
-
+darksocv_gate.vvp: darksimv.v ../rtl/darksocv.v ../rtl/darkuart.v ../rtl/post_synthesis/$(addsuffix .v,$(NETLIST)) ../nangate/NangateOpenCellLibrary.v
+	$(IVERILOG) -o $@ -I../rtl $^
+	chmod -x $@

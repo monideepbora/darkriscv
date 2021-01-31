@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Script to generate dynamic script for parameter driven synthesis
+#Script to generate dynamic script for dynamic verilog defines
 
 PIPELINE_STAGE=""
 THREADING=""

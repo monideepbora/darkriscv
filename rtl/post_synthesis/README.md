@@ -1,0 +1,1 @@
+Folder where the dynamically generated netlist is saved.

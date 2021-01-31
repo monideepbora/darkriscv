@@ -30,6 +30,9 @@
 
 `timescale 1ns / 1ps
 
+`define __RESETPC__ 32'd0
+`define __RESETSP__ 32'd39318
+
 // implemented opcodes:
 
 `define LUI     7'b01101_11      // lui   rd,imm[31:12]
@@ -86,14 +89,7 @@ module darkriscv
     wire [31:0] ALL1  = -1;
 
 `ifdef __THREADING__
-    initial begin
-        $display("\nThreading enabled");
-    end
     reg XMODE = 0;     // 0 = user, 1 = exception
-`else
-    initial begin
-        $display("\nThreading disabled");
-    end
 `endif
     
     // pre-decode: IDATA is break apart as described in the RV32I specification

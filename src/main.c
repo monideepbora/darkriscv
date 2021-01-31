@@ -37,13 +37,12 @@ int main(void)
 
     threads = 0; // prepare for the next restart
 
-    printf("\n");
-    printf("Welcome to DarkRISCV!\n");
-    printf("\n");
-    printf("Starting tests for %s\n",ARCH);
-    printf("\n");
+   
+     putstr("Welcome to DarkRISCV!\n");
     
-     __asm__ volatile("j start;"); //jump to risc-tests
+     printf("Starting tests for %s\n",ARCH);
+    
+    __asm__ volatile("j start;"); //jump to risc-tests
 }
 
 //console functions to output tests status

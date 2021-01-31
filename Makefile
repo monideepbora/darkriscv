@@ -35,22 +35,36 @@
 #
 
 # default input arguments
-ifndef ARCH
-ARCH = RV32I
+
+ARCH ?= RV32I
+
+ifeq ($(ARCH),RV32I)
+NETLIST=darkriscv-post-synth-rv32i
+endif
+
+ifeq ($(ARCH),RV32E)
+NETLIST=darkriscv-post-synth-rv32e
 endif
 
 PIPELINE_STAGE ?= 2
 THREADING ?= 0
 WAITSTATES ?= 0
 
-
-
-default: test_rtl
+default: test_gate
 
 test_rtl:
-	make -C src all  ARCH=$(ARCH)   
+	make -C src all ARCH=$(ARCH) RTL=1   
 	make -C rtl compute_config PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES)           
-	make -C sim test_rtl ARCH=$(ARCH)             
+	make -C sim test_rtl ARCH=$(ARCH)  
+
+test_gate:
+	make -C src all  ARCH=$(ARCH) RTL=0   
+	make -C rtl compute_config PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES)           
+	make -C rtl synth ARCH=$(ARCH) NETLIST=$(NETLIST) PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES)
+	make -C sim test_gate ARCH=$(ARCH) NETLIST=$(NETLIST)    
+
+synth:
+	make -C rtl synth ARCH=$(ARCH) NETLIST=$(NETLIST) PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES)
 	
 clean:
 	make -C src clean

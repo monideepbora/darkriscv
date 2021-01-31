@@ -71,7 +71,7 @@ BUILD = $(shell date -R)
     OC = $(TOOLCHAIN_PREFIX)objcopy
     OD = $(TOOLCHAIN_PREFIX)objdump
   
-CCFLAGS = -Wall -fcommon -I./include -Os -march=$(MARCH) -mabi=$(MABI) -D__RISCV__ -DBUILD="\"$(BUILD)\"" -DARCH="\"$(ARCH)\""
+CCFLAGS = -Wall -fcommon -I./include -Os -march=$(MARCH) -mabi=$(MABI) -D__RISCV__ -DBUILD="\"$(BUILD)\"" -DARCH="\"$(ARCH)\"" -DRTL=$(RTL)
 ASFLAGS = -march=$(MARCH) -mabi=$(MABI)
 LDFLAGS = -march=$(MARCH) -mabi=$(MABI) -T$(PROJ).ld -Map=$(PROJ).map -m elf32lriscv
 OCFLAGS = -O binary

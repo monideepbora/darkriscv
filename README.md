@@ -57,7 +57,7 @@ PIPELINE_STAGE ?= 2 (2-stage pipeline, default)
 PIPELINE_STAGE = 3 (3-stage pipeline)
 
 THREADING = 1 (enable multi-threading, experimental)
-THREADING = 0 (enable multi-threading, default)
+THREADING = 0 (disable multi-threading, default)
 
 WAITSTATES = 1 (enable waitstates)
 WAITSTATES = 0 (disable waitstates, default)

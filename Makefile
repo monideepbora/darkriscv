@@ -52,12 +52,12 @@ WAITSTATES ?= 0
 
 default: test_gate
 
-test_rtl:
+test_rtl: clean
 	make -C src all ARCH=$(ARCH) RTL=1   
 	make -C rtl compute_config PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES) ARCH=$(ARCH)           
 	make -C sim test_rtl ARCH=$(ARCH)  
 
-test_gate:
+test_gate: clean
 	make -C src all  ARCH=$(ARCH) RTL=0   
 	make -C rtl compute_config PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES)           
 	make -C rtl synth ARCH=$(ARCH) NETLIST=$(NETLIST) PIPELINE_STAGE=$(PIPELINE_STAGE) THREADING=$(THREADING) WAITSTATES=$(WAITSTATES) ARCH=$(ARCH)
